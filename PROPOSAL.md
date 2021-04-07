@@ -31,8 +31,9 @@ I want to begin on a very basic game engine that handles just a player within a 
 I hope that by this week, I have a very basic game engine and cinder application where a player can move through hardcoded rooms with keyboard inputs.
 #### Week2
 For the second week of the project, I hope to expand on the game engine, allowing a player to interact with hard coded items and enemies placed within the room.
+I also want to spend this week creating a variety of enemies and items the player may encounter.
 #### Week3
-For the third week of the project, I hope move away from hard coded rooms and enemies and instead focus on random generation that makes sense. 
+For the third week of the project, I hope to move away from hard coded rooms and enemies and instead focus on random generation that makes sense. 
 
 ### Stretch Goals
 * Include boss enemies.
