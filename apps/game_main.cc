@@ -2,9 +2,14 @@
 // Created by Larry Peng on 4/18/21.
 //
 #include <iostream>
-// Runs a game instance
+#include <game/game_engine.h>
+// Using format to run cinder app from gas simulation and naive bayes
 
-int main() {
-  // Test if loaded cmake works
-  std::cout << "TEST" << std::endl;
+using finalproject::game::GameEngine;
+
+// Same method as previous cinder projects to ensure window is not resizable
+void prepareSettings(GameEngine::Settings* settings) {
+  settings->setResizable(false);
 }
+
+CINDER_APP(GameEngine, ci::app::RendererGl, prepareSettings);

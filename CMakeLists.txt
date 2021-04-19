@@ -53,21 +53,18 @@ get_filename_component(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/" ABSOLUTE)
 include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
 # Need to add more as I add more files to the entity directory
-list(APPEND ENTITY_SOURCE_FILES src/entity/player.cc)
+list(APPEND ENTITY_SOURCE_FILES src/entity/entity.cc
+                                src/entity/player.cc)
 
 list(APPEND SOURCE_FILES    ${ENTITY_SOURCE_FILES}
                             src/game/game_engine.cc
+                            src/game/item.cc
                             src/game/room.cc)
 
 # Need to add more test files
 list(APPEND TEST_FILES tests/test_game_engine.cc
         tests/test_player.cc
         tests/test_room.cc)
-
-# Need to adjust executable to test game components without the visualizer/game engine
-#add_executable(train-model apps/train_model_main.cc ${CORE_SOURCE_FILES})
-#target_include_directories(train-model PRIVATE include)
-
 
 # This works
 ci_make_app(
