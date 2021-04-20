@@ -6,8 +6,6 @@
 
 namespace finalproject {
 
-namespace game {
-
 class Item {
 
  public:
@@ -38,14 +36,6 @@ class Item {
 
 
 };
-
-
-
-
-
-}
-
-
 
 
 }

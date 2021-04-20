@@ -5,7 +5,7 @@
 #include <game/game_engine.h>
 // Using format to run cinder app from gas simulation and naive bayes
 
-using finalproject::game::GameEngine;
+using finalproject::GameEngine;
 
 // Same method as previous cinder projects to ensure window is not resizable
 void prepareSettings(GameEngine::Settings* settings) {

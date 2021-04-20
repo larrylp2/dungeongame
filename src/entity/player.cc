@@ -6,15 +6,12 @@
 
 namespace finalproject {
 
-namespace entity {
-
 Player::Player() {
-  current_room_ = game::Room();
+  current_room_ = Room();
   location_ = glm::vec2(100, 100);
 }
 
 void Player::Display() const {
-
   //Temporarily an orange triangle to represent the player
   ci::gl::color(ci::Color("orange"));
   glm::vec2 top_point(location_.x, location_.y - 10);
@@ -39,11 +36,15 @@ void Player::MoveRight() {
   location_.x += speed_;
 }
 
-
-
-
+glm::vec2 Player::GetLocation() const {
+  return location_;
 }
 
+
+void Player::Interact(const Portal& portal) {
+  location_ = portal.GetDestination().GetLocation();
+  std::cout << "Interact" << std::endl;
+}
 
 
 }

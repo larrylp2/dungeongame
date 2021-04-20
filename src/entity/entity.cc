@@ -5,13 +5,6 @@
 
 namespace finalproject {
 
-namespace entity {
-
-
-
-
-
-}
 
 
 }

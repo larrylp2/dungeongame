@@ -4,8 +4,6 @@
 #include "game/item.h"
 namespace finalproject {
 
-namespace game {
-
 Item::Item() {
   health_mod_ = 0;
   attack_mod_ = 0;
@@ -14,12 +12,5 @@ Item::Item() {
   dexterity_mod_ = 0;
   vitality_mod_ = 0;
 }
-
-
-
-}
-
-
-
 
 }

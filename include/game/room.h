@@ -6,10 +6,9 @@
 
 #include <vector>
 #include "entity/entity.h"
+#include "entity/portal.h"
 
 namespace finalproject {
-
-namespace game {
 
 class Room {
  public:
@@ -31,20 +30,40 @@ class Room {
    */
   void Display() const;
 
+  /**
+   * Adds an entity to this room
+   *
+   * @param entity the entity to add to this room
+   */
+  void AddEntity(Entity& entity);
+
+  /**
+   * Adds a portal to this room
+   *
+   * @param portal the portal to add to this room
+   */
+  void AddPortal(Portal& portal);
+
+  /**
+   * Gets the entities within the room
+   */
+  std::vector<Entity> GetEntities() const;
+
+  /**
+   * Gets the portals within the room
+   */
+  std::vector<Portal> GetPortals() const;
+
  private:
-  //std::vector<std::vector<entity::Entity>>entities_;
+
+  std::vector<Entity> entities_;
+
+  std::vector<Portal> portals_;
+
   double width_;
   double height_;
   double margin_;
 };
-
-
-
-
-
-
-
-}
 
 
 }

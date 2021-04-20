@@ -8,21 +8,14 @@
 
 namespace finalproject {
 
-namespace entity {
-
 class Entity {
  public:
+  Entity();
   /**
    * Returns the pixel location of this entity
    * @return the pixel location
    */
-  glm::vec2 GetPixelLoc() const;
-
-  /**
-   * Returns the grid location of this entity within a room
-   * @return the grid location
-   */
-  glm::vec2 GetGridLoc() const;
+  glm::vec2 GetLocation() const;
 
   /**
    * Returns the name of this entity
@@ -35,21 +28,19 @@ class Entity {
    */
   void Display() const;
 
+  //Need to fix OOP to allow for an Interact(Player) method here
+  //Does not work because of circular dependency with header files
+
  private:
 
   //Location of the entity
   //Need to figure out how to use this with child classes in C++ OOP
-  glm::vec2 pixel_loc_;
+  //glm::vec2 pixel_loc_;
 
   //glm::vec2 grid_loc_;
 
-  std::string name_;
+  //std::string name_;
 
 };
-
-
-
-}
-
 
 }

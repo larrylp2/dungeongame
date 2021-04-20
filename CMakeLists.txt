@@ -54,11 +54,13 @@ include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
 # Need to add more as I add more files to the entity directory
 list(APPEND ENTITY_SOURCE_FILES src/entity/entity.cc
-                                src/entity/player.cc)
+                                src/entity/player.cc
+                                src/entity/portal.cc)
 
 list(APPEND SOURCE_FILES    ${ENTITY_SOURCE_FILES}
                             src/game/game_engine.cc
                             src/game/item.cc
+                            src/game/level.cc
                             src/game/room.cc)
 
 # Need to add more test files

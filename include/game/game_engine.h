@@ -9,13 +9,11 @@
 #include "cinder/gl/gl.h"
 #include <vector>
 #include "game/room.h"
+#include "game/level.h"
 #include "entity/player.h"
 
 // Need to decide on a name for the game
 namespace finalproject {
-
-namespace game {
-
 
 /**
  * Launches the visual game
@@ -41,18 +39,16 @@ class GameEngine : public ci::app::App {
 
  private:
   //The current room displayed on the screen
-  game::Room current_room_;
+  Room current_room_;
 
-  //All of the rooms within the game
-  std::vector<game::Room> rooms_;
+  //All of the levels within the game
+  //std::vector<game::Level> levels_;
+
+  //Level level_;
 
   //The player
-  entity::Player player_;
+  Player player_;
 
 };
-
-
-}
-
 
 }

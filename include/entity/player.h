@@ -5,15 +5,13 @@
 #pragma once
 
 #include <vector>
-#include "entity/entity.h"
 #include "game/item.h"
 #include "game/room.h"
+#include "entity/portal.h"
 
 namespace finalproject {
 
-namespace entity {
-
-class Player: public entity::Entity {
+class Player {
  public:
   /**
    * Default Constructor for a player class.
@@ -45,23 +43,39 @@ class Player: public entity::Entity {
    */
   void Display() const;
 
+  /**
+   * Updates the player's location
+   *
+   * @param location the player's new location
+   */
+  void UpdateLocation(glm::vec2 location);
+
+  /**
+   * Retrieves the player's location
+   *
+   * @return the player's location
+   */
+  glm::vec2 GetLocation() const;
+
+  /**
+   * Handles player interaction with a portal, updating player location and returning new room
+   */
+  void Interact(const Portal& portal);
+
+
  private:
   // The current room of the player
-  game::Room current_room_;
+  Room current_room_;
 
   // The inventory of the player
-  std::vector<game::Item> inventory_;
+  std::vector<Item> inventory_;
 
   // The current location of the player
   glm::vec2 location_;
 
   // The speed of the player (temporary default value 10)
-  double speed_ = 10;
+  double speed_ = 50;
 
 };
-
-
-}
-
 
 }

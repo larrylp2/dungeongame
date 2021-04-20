@@ -3,17 +3,27 @@
 //
 
 #include "game/game_engine.h"
+#include "entity/portal.h"
 
 namespace finalproject {
-
-namespace game {
 
 GameEngine::GameEngine() {
   // Placeholder/test to see if cinder app visualization works from cmake configuration
   ci::app::setWindowSize(kWindowWidth, kWindowHeight);
 
-  current_room_ = game::Room(kWindowWidth - 2 * kRoomMargin, kWindowHeight - 2 * kRoomMargin, kRoomMargin);
-  player_ = entity::Player();
+  current_room_ = Room(kWindowWidth - 2 * kRoomMargin, kWindowHeight - 2 * kRoomMargin, kRoomMargin);
+  player_ = Player();
+
+  //Adds two portals to the current room
+  Portal portal_one = Portal(glm::vec2(300,300));
+  Portal portal_two = Portal(glm::vec2(400,400));
+  portal_one.LinkPortal(portal_two);
+  portal_two.LinkPortal(portal_one);
+
+  current_room_.AddPortal(portal_one);
+  current_room_.AddPortal(portal_two);
+  //level_.AddRoom(current_room_);
+  //level_.AddRoom(room_two);
 }
 
 void GameEngine::draw() {
@@ -34,9 +44,19 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
     player_.MoveDown();
   } else if (event_code == ci::app::KeyEvent::KEY_d) {
     player_.MoveRight();
+  } else if (event_code == ci::app::KeyEvent::KEY_SPACE) {
+    /*for (size_t index = 0; index < current_room_.GetEntities().size(); index++) {
+      if (glm::distance(player_.GetLocation(), current_room_.GetEntities().at(index).GetLocation()) <= 40) {
+        Room current_room = current_room_.GetEntities().at(index).Interact(current_player_);
+      }
+    }*/
+    for (size_t index = 0; index < current_room_.GetPortals().size(); index++) {
+      if (glm::distance(player_.GetLocation(), current_room_.GetPortals().at(index).GetLocation()) <= 40) {
+        player_.Interact(current_room_.GetPortals().at(index));
+        break;
+      }
+    }
   }
-}
-
 }
 
 }
