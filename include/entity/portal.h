@@ -7,6 +7,10 @@
 
 namespace finalproject {
 
+/**
+ * Handles a portal that teleports a player to a new location
+ * (currently only within a room, not between rooms)
+ */
 class Portal {
  public:
   Portal();
@@ -17,7 +21,7 @@ class Portal {
    */
   Portal(const glm::vec2& location);
 
-
+  //May do the method below in the future
   /**
    * Destructor for a portal
    */

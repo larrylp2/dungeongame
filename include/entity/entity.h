@@ -8,6 +8,9 @@
 
 namespace finalproject {
 
+/**
+ * Class that handles entities within a game (may remove later)
+ */
 class Entity {
  public:
   Entity();

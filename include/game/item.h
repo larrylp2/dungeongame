@@ -6,11 +6,14 @@
 
 namespace finalproject {
 
+/**
+ * Class that represents an item a player can pick up to get stronger.
+ */
 class Item {
 
  public:
   /**
-   * Default constructor for item
+   * Default constructor for item.
    */
   Item();
 

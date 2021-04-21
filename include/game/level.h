@@ -8,6 +8,9 @@
 
 namespace finalproject {
 
+/**
+ * Class that represents a level within the game, containing multiple rooms.
+ */
 class Level {
 
  public:

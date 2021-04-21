@@ -11,6 +11,9 @@
 
 namespace finalproject {
 
+/**
+ * Class that represents the player.
+ */
 class Player {
  public:
   /**
@@ -19,46 +22,46 @@ class Player {
   Player();
 
   /**
-   * Moves the player up
+   * Moves the player up.
    */
   void MoveUp();
 
   /**
-   * Moves the player down
+   * Moves the player down.
    */
   void MoveDown();
 
   /**
-   * Moves the player left
+   * Moves the player left.
    */
   void MoveLeft();
 
   /**
-   * Moves the player right
+   * Moves the player right.
    */
   void MoveRight();
 
   /**
-   * Displays a player
+   * Displays a player.
    */
   void Display() const;
 
   /**
-   * Updates the player's location
+   * Updates the player's location.
    *
    * @param location the player's new location
    */
   void UpdateLocation(glm::vec2 location);
 
   /**
-   * Retrieves the player's location
+   * Retrieves the player's location.
    *
    * @return the player's location
    */
   glm::vec2 GetLocation() const;
 
   /**
-   * Handles player interaction with a portal, updating player location and returning new room
+   * Handles player interaction with a portal, updating player location and returning new room.
    */
   void Interact(const Portal& portal);
 

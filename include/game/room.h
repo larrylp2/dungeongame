@@ -10,6 +10,10 @@
 
 namespace finalproject {
 
+/**
+ * Class that represents a room within the game that the player can explore.
+ * (need to adjust entities/portals to fit onto tiles to make easier)
+ */
 class Room {
  public:
   /**
@@ -55,13 +59,19 @@ class Room {
   std::vector<Portal> GetPortals() const;
 
  private:
-
+  //The entities within this room
   std::vector<Entity> entities_;
 
+  //The portals within this room
   std::vector<Portal> portals_;
 
+  //The width of this room
   double width_;
+
+  //The height of this room
   double height_;
+
+  //The margin from this room to the edge of the game window
   double margin_;
 };
 

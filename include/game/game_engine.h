@@ -16,24 +16,26 @@
 namespace finalproject {
 
 /**
- * Launches the visual game
+ * Launches the visual game.
  */
 class GameEngine : public ci::app::App {
  public:
   /**
-   * Default constructor for a GameEngine
+   * Default constructor for a GameEngine.
    */
   GameEngine();
 
   // Override methods of cinder app
   void draw() override;
-
   void keyDown(ci::app::KeyEvent event) override;
 
+  //Width of the game window
   double kWindowWidth = 800;
 
+  //Height of the game window
   double kWindowHeight = 800;
 
+  //Margin of the game window
   double kRoomMargin = 50;
 
 
@@ -41,9 +43,10 @@ class GameEngine : public ci::app::App {
   //The current room displayed on the screen
   Room current_room_;
 
-  //All of the levels within the game
+  //All of the levels within the game (need to improve level class before adding)
   //std::vector<game::Level> levels_;
 
+  //The current level
   //Level level_;
 
   //The player
