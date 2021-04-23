@@ -4,6 +4,7 @@
 
 #include "game/game_engine.h"
 #include "entity/portal.h"
+#include "entity/obstacle.h"
 
 namespace finalproject {
 
@@ -22,6 +23,10 @@ GameEngine::GameEngine() {
 
   current_room_.AddPortal(portal_one);
   current_room_.AddPortal(portal_two);
+
+  Obstacle obstacle = Obstacle(glm::vec2(350, 350), 5, kWindowHeight - 2 * kRoomMargin, kRoomMargin);
+  current_room_.AddObstacle(obstacle);
+
   //level_.AddRoom(current_room_);
   //level_.AddRoom(room_two);
 }
@@ -51,12 +56,18 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
       }
     }*/
     for (size_t index = 0; index < current_room_.GetPortals().size(); index++) {
-      if (glm::distance(player_.GetLocation(), current_room_.GetPortals().at(index).GetLocation()) <= 40) {
+      if (glm::distance(player_.GetLocation(), current_room_.GetPortals().at(index).GetLocation()) <= 10) {
         player_.Interact(current_room_.GetPortals().at(index));
         break;
       }
     }
   }
 }
+
+
+
+
+
+
 
 }

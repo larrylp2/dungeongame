@@ -61,6 +61,13 @@ class Player {
   glm::vec2 GetLocation() const;
 
   /**
+   * Retrieves the player's speed.
+   *
+   * @return the player's speed
+   */
+  double GetSpeed() const;
+
+  /**
    * Handles player interaction with a portal, updating player location and returning new room.
    */
   void Interact(const Portal& portal);
@@ -77,7 +84,7 @@ class Player {
   glm::vec2 location_;
 
   // The speed of the player (temporary default value 10)
-  double speed_ = 50;
+  double speed_ = 10;
 
 };
 

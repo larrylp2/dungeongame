@@ -5,8 +5,8 @@
 #pragma once
 
 #include <vector>
-#include "entity/entity.h"
 #include "entity/portal.h"
+#include "entity/obstacle.h"
 
 namespace finalproject {
 
@@ -35,11 +35,19 @@ class Room {
   void Display() const;
 
   /**
-   * Adds an entity to this room
+   * Adds an obstacle to this room
    *
-   * @param entity the entity to add to this room
+   * @param obstacle to add
    */
-  void AddEntity(Entity& entity);
+  void AddObstacle(const Obstacle& obstacle);
+
+  /**
+   * Checks if there is an obstacle near a location.
+   *
+   * @param location the location to check
+   * @return a boolean if there is an obstacle at that location within the room
+   */
+  bool CheckObstacle(const glm::vec2& location) const;
 
   /**
    * Adds a portal to this room
@@ -49,18 +57,13 @@ class Room {
   void AddPortal(Portal& portal);
 
   /**
-   * Gets the entities within the room
-   */
-  std::vector<Entity> GetEntities() const;
-
-  /**
    * Gets the portals within the room
    */
   std::vector<Portal> GetPortals() const;
 
  private:
-  //The entities within this room
-  std::vector<Entity> entities_;
+  //The obstacles within this room
+  std::vector<Obstacle> obstacles_;
 
   //The portals within this room
   std::vector<Portal> portals_;

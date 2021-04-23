@@ -26,9 +26,9 @@ void Room::Display() const {
           glm::vec2(margin_, margin_),
           glm::vec2(width_ + margin_, height_ + margin_)));
 
-//  for (size_t index = 0; index < entities_.size(); index++) {
-//    entities_.at(index).Display();
-//  }
+  for (size_t index = 0; index < obstacles_.size(); index++) {
+    obstacles_.at(index).Display();
+  }
   for (size_t index = 0; index < portals_.size(); index++) {
     portals_.at(index).Display();
   }
@@ -39,17 +39,18 @@ void Room::AddPortal(Portal& portal) {
   portals_.push_back(portal);
 }
 
-void Room::AddEntity(Entity& entity) {
-  entities_.push_back(entity);
-}
-
-std::vector<Entity> Room::GetEntities() const {
-  return(entities_);
+void Room::AddObstacle(const Obstacle &obstacle) {
+  obstacles_.push_back(obstacle);
 }
 
 std::vector<Portal> Room::GetPortals() const {
   return(portals_);
 }
+
+bool Room::CheckObstacle(const glm::vec2& location) const {
+
+}
+
 
 
 }

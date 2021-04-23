@@ -40,6 +40,9 @@ glm::vec2 Player::GetLocation() const {
   return location_;
 }
 
+double Player::GetSpeed() const {
+  return speed_;
+}
 
 void Player::Interact(const Portal& portal) {
   location_ = portal.GetDestination().GetLocation();
