@@ -38,41 +38,47 @@ class Room {
    * Adds an obstacle to this room
    *
    * @param obstacle to add
+   * @param column the column of the portal
+   * @param row the row of the portal
    */
-  void AddObstacle(const Obstacle& obstacle);
+  //void AddObstacle(const Obstacle& obstacle, size_t column, size_t row);
 
-  /**
-   * Checks if there is an obstacle near a location.
-   *
-   * @param location the location to check
-   * @return a boolean if there is an obstacle at that location within the room
-   */
-  bool CheckObstacle(const glm::vec2& location) const;
 
   /**
    * Adds a portal to this room
    *
    * @param portal the portal to add to this room
+   * @param column the column of the portal
+   * @param row the row of the portal
    */
-  void AddPortal(Portal& portal);
+  //void AddPortal(Portal& portal, size_t column, size_t row);
+
 
   /**
    * Gets the portals within the room
    */
-  std::vector<Portal> GetPortals() const;
+  std::vector<std::vector<Portal>> GetPortals() const;
+
+  /**
+   * Gets the grid side size
+   */
+  double GetGridSize() const;
 
  private:
   //The obstacles within this room
-  std::vector<Obstacle> obstacles_;
+  //std::vector<std::vector<Obstacle>> obstacles_;
 
   //The portals within this room
-  std::vector<Portal> portals_;
+  //std::vector<std::vector<Portal>> portals_;
 
-  //The width of this room
+  //The width of this room in grid positions
   double width_;
 
-  //The height of this room
+  //The height of this room in grid positions
   double height_;
+
+  //The side length of one grid square
+  double kGridSide = 40;
 
   //The margin from this room to the edge of the game window
   double margin_;

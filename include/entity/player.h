@@ -22,26 +22,6 @@ class Player {
   Player();
 
   /**
-   * Moves the player up.
-   */
-  void MoveUp();
-
-  /**
-   * Moves the player down.
-   */
-  void MoveDown();
-
-  /**
-   * Moves the player left.
-   */
-  void MoveLeft();
-
-  /**
-   * Moves the player right.
-   */
-  void MoveRight();
-
-  /**
    * Displays a player.
    */
   void Display() const;
@@ -49,23 +29,31 @@ class Player {
   /**
    * Updates the player's location.
    *
-   * @param location the player's new location
+   * @param row how much to change the row by
+   * @param col how much to change the col by
    */
-  void UpdateLocation(glm::vec2 location);
+  void UpdateLocation(size_t row, size_t col);
 
   /**
-   * Retrieves the player's location.
+   * Updates the player's current room.
    *
-   * @return the player's location
+   * @param room the current room of the player
    */
-  glm::vec2 GetLocation() const;
+  void UpdateRoom(Room room);
 
   /**
-   * Retrieves the player's speed.
+   * Get player column.
    *
-   * @return the player's speed
+   * @return the player's column location
    */
-  double GetSpeed() const;
+  size_t GetColumn() const;
+
+  /**
+   * Get player row.
+   *
+   * @return the player's row location
+   */
+  size_t GetRow() const;
 
   /**
    * Handles player interaction with a portal, updating player location and returning new room.
@@ -77,14 +65,14 @@ class Player {
   // The current room of the player
   Room current_room_;
 
+  // The row of the player
+  size_t row_;
+
+  // The col of the player
+  size_t col_;
+
   // The inventory of the player
   std::vector<Item> inventory_;
-
-  // The current location of the player
-  glm::vec2 location_;
-
-  // The speed of the player (temporary default value 10)
-  double speed_ = 10;
 
 };
 

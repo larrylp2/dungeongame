@@ -10,6 +10,8 @@ Room::Room() {
   width_ = 0;
   height_ = 0;
   margin_ = 0;
+  //portals_ = std::vector<std::vector<Portal>>(height_, std::vector<Portal>(width_));
+  //obstacles_ = std::vector<std::vector<Obstacle>>(height_, std::vector<Obstacle>(width_));
 }
 
 
@@ -17,39 +19,46 @@ Room::Room(double width, double height, double margin) {
   width_ = width;
   height_ = height;
   margin_ = margin;
+  //portals_ = std::vector<std::vector<Portal>>(height_, std::vector<Portal>(width_));
+  //obstacles_ = std::vector<std::vector<Obstacle>>(height_, std::vector<Obstacle>(width_));
 }
 
 void Room::Display() const {
-  // Currently only displays the borders of the room
-  ci::gl::color(ci::Color("white"));
-  ci::gl::drawStrokedRect(ci::Rectf(
-          glm::vec2(margin_, margin_),
-          glm::vec2(width_ + margin_, height_ + margin_)));
-
-  for (size_t index = 0; index < obstacles_.size(); index++) {
-    obstacles_.at(index).Display();
+  for (size_t row = 0; row < height_; row++) {
+    for(size_t column = 0; column < width_; column++) {
+      //Draws a grid from many empty rectangles
+      ci::gl::color(ci::Color("white"));
+      ci::gl::drawStrokedRect(ci::Rectf(
+              glm::vec2(row * kGridSide,  column * kGridSide),
+              glm::vec2((row + 1) * kGridSide,  (column + 1) * kGridSide)));
+      //obstacles_.at(row).at(column).Display();
+      //portals_.at(row).at(column).Display();
+    }
   }
-  for (size_t index = 0; index < portals_.size(); index++) {
-    portals_.at(index).Display();
-  }
-
 }
 
-void Room::AddPortal(Portal& portal) {
-  portals_.push_back(portal);
+double Room::GetGridSize() const {
+  return kGridSide;
 }
 
-void Room::AddObstacle(const Obstacle &obstacle) {
-  obstacles_.push_back(obstacle);
-}
 
-std::vector<Portal> Room::GetPortals() const {
-  return(portals_);
+/*
+void Room::AddPortal(Portal& portal, size_t column, size_t row) {
+  //portals_.at(row).at(column) = portal;
 }
+ */
 
-bool Room::CheckObstacle(const glm::vec2& location) const {
-
+/*
+void Room::AddObstacle(const Obstacle &obstacle, size_t column, size_t row) {
+  //obstacles_.at(row).at(column) = obstacle;
 }
+ */
+
+/*
+std::vector<std::vector<Portal>> Room::GetPortals() const {
+  //return(portals_);
+}
+ */
 
 
 
