@@ -4,6 +4,8 @@
 
 #pragma once
 #include "cinder/gl/gl.h"
+#include "game/room.h"
+#include "entity/player.h"
 
 namespace finalproject {
 
@@ -19,8 +21,9 @@ class Portal {
    *
    * @param row the row of this portal
    * @param col the column of this portal
+   * @param room the room this portal is in
    */
-  Portal(size_t row, size_t col);
+  Portal(size_t row, size_t col, Room& room);
 
   /**
    * Links this portal to another portal.
@@ -60,21 +63,41 @@ class Portal {
 
 
   /**
-   * Gets if this portal is valid or not.
+   * Gets the current room of this portal
    *
-   * @return the validity as a boolean
+   * @return the room
    */
+  Room* GetRoom() const;
+
+
+
+    /**
+     * Gets if this portal is valid or not.
+     *
+     * @return the validity as a boolean
+     */
   bool IsValid() const;
+
+  /**
+   * Handles portal interaction by a player
+   *
+   * @param player the player who entered the portal
+   * @return the room the destination portal is in
+   */
+  Room* Interact(Player* player);
 
  private:
   //destination portal this leads to
   Portal* destination_;
 
+  //The current room that this portal is in
+  Room* current_room_;
+
   size_t col_;
 
   size_t row_;
 
-  bool valid_;
+  //bool valid_;
 };
 
 }

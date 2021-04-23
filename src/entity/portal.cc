@@ -8,13 +8,14 @@ namespace finalproject {
 Portal::Portal() {
   row_ = 0;
   col_ = 0;
-  valid_ = false;
+  //valid_ = false;
 }
 
-Portal::Portal(size_t row, size_t col) {
+Portal::Portal(size_t row, size_t col, Room& room) {
   row_ = row;
   col_ = col;
-  valid_ = true;
+  current_room_ = &room;
+  //valid_ = true;
 }
 
 void Portal::LinkPortal(Portal& destination) {
@@ -33,6 +34,10 @@ Portal Portal::GetDestination() const {
   return *destination_;
 }
 
+Room* Portal::GetRoom() const {
+  return current_room_;
+}
+
 size_t Portal::GetRow() const {
   return row_;
 }
@@ -42,9 +47,19 @@ size_t Portal::GetCol() const {
   return col_;
 }
 
+Room* Portal::Interact(Player* player) {
+  size_t current_row = player->GetRow();
+  size_t current_col = player->GetCol();
+  size_t new_row = destination_->GetRow();
+  size_t new_col = destination_->GetCol();
+  player->UpdateLocation(new_row - current_row, new_col - current_col);
+  return destination_->GetRoom();
+}
+
+/*
 bool Portal::IsValid() const {
   return valid_;
-}
+} */
 
 }
 

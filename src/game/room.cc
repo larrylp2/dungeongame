@@ -10,17 +10,18 @@ Room::Room() {
   width_ = 0;
   height_ = 0;
   margin_ = 0;
-  portals_ = std::vector<std::vector<Portal>>(height_, std::vector<Portal>(width_));
+  //portals_ = std::vector<std::vector<Portal>>(height_, std::vector<Portal>(width_));
   obstacles_ = std::vector<std::vector<Obstacle>>(height_, std::vector<Obstacle>(width_));
 }
 
 
-Room::Room(double width, double height, double margin) {
+Room::Room(double width, double height, double margin, size_t order) {
   width_ = width;
   height_ = height;
   margin_ = margin;
-  portals_ = std::vector<std::vector<Portal>>(height_, std::vector<Portal>(width_));
+  //portals_ = std::vector<std::vector<Portal>>(height_, std::vector<Portal>(width_));
   obstacles_ = std::vector<std::vector<Obstacle>>(height_, std::vector<Obstacle>(width_));
+  order_ = order;
 }
 
 void Room::Display() const {
@@ -35,10 +36,11 @@ void Room::Display() const {
       if (current_obstacle.IsValid()) {
         current_obstacle.Display(row, column, kGridSide);
       }
+      /*
       Portal current_portal = portals_.at(row).at(column);
       if (current_portal.IsValid()) {
         current_portal.Display(kGridSide);
-      }
+      } */
     }
   }
 }
@@ -48,14 +50,12 @@ double Room::GetGridSize() const {
 }
 
 
-
+/*
 void Room::AddPortal(Portal& portal) {
   size_t row = portal.GetRow();
   size_t col = portal.GetCol();
   portals_.at(row).at(col) = portal;
-}
-
-
+}*/
 
 void Room::DesignateObstacles(const std::vector<std::tuple<size_t, size_t>>& coordinates) {
   for (size_t index = 0; index < coordinates.size(); index++) {
@@ -68,10 +68,14 @@ std::vector<std::vector<Obstacle>> Room::GetObstacles() const {
   return obstacles_;
 }
 
+size_t Room::GetOrder() const {
+  return order_;
+}
 
+/*
 std::vector<std::vector<Portal>> Room::GetPortals() const {
   return(portals_);
-}
+}*/
 
 
 

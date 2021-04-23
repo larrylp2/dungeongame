@@ -6,7 +6,6 @@
 
 #include <vector>
 #include <tuple>
-#include "entity/portal.h"
 #include "entity/obstacle.h"
 
 namespace finalproject {
@@ -27,8 +26,9 @@ class Room {
    * @param width the width of the room
    * @param height the height of the room
    * @param margin the margin between room edges and the window edges
+   * @param order the order of the room within a level
    */
-  Room(double width, double height, double margin);
+  Room(double width, double height, double margin, size_t order);
 
   /**
    * Displays the room within the game
@@ -48,7 +48,7 @@ class Room {
    *
    * @param portal the portal to add to this room
    */
-  void AddPortal(Portal& portal);
+  //void AddPortal(Portal& portal);
 
   /**
    * Gets the obstacles within the room
@@ -58,19 +58,24 @@ class Room {
   /**
    * Gets the portals within the room
    */
-  std::vector<std::vector<Portal>> GetPortals() const;
+  //std::vector<std::vector<Portal>> GetPortals() const;
 
   /**
    * Gets the grid side size
    */
   double GetGridSize() const;
 
+  /**
+   * Gets the index of this room within a level
+   */
+  size_t GetOrder() const;
+
  private:
   //The obstacles within this room
   std::vector<std::vector<Obstacle>> obstacles_;
 
   //The portals within this room
-  std::vector<std::vector<Portal>> portals_;
+  //std::vector<std::vector<Portal>> portals_;
 
   //The width of this room in grid positions
   double width_;
@@ -83,6 +88,9 @@ class Room {
 
   //The margin from this room to the edge of the game window
   double margin_;
+
+  //The order this room is within the level
+  size_t order_;
 };
 
 

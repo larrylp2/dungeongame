@@ -7,7 +7,6 @@
 #include <vector>
 #include "game/item.h"
 #include "game/room.h"
-#include "entity/portal.h"
 
 namespace finalproject {
 
@@ -55,10 +54,12 @@ class Player {
    */
   size_t GetRow() const;
 
+
   /**
    * Handles player interaction with a portal, updating player location and returning new room.
    */
-  void Interact(const Portal& portal);
+  //void Interact(const Portal& portal);
+
 
 
  private:

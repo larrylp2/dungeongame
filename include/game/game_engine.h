@@ -11,6 +11,7 @@
 #include "game/room.h"
 #include "game/level.h"
 #include "entity/player.h"
+#include "entity/portal.h"
 
 // Need to decide on a name for the game
 namespace finalproject {
@@ -41,13 +42,16 @@ class GameEngine : public ci::app::App {
 
  private:
   //The current room displayed on the screen
-  Room current_room_;
+  Room* current_room_;
+
+  //All of the portals within the game, with each vector of portals representing the portals within the game
+  std::vector<std::vector<Portal>> portals_;
 
   //All of the levels within the game (need to improve level class before adding)
-  //std::vector<game::Level> levels_;
+  std::vector<Level> levels_;
 
   //The current level
-  //Level level_;
+  Level level_ = Level(2);
 
   //The player
   Player player_;
