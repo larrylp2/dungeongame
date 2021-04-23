@@ -46,7 +46,7 @@ class Player {
    *
    * @return the player's column location
    */
-  size_t GetColumn() const;
+  size_t GetCol() const;
 
   /**
    * Get player row.

@@ -48,10 +48,8 @@ class Room {
    * Adds a portal to this room
    *
    * @param portal the portal to add to this room
-   * @param column the column of the portal
-   * @param row the row of the portal
    */
-  //void AddPortal(Portal& portal, size_t column, size_t row);
+  void AddPortal(Portal& portal);
 
 
   /**
@@ -69,7 +67,7 @@ class Room {
   //std::vector<std::vector<Obstacle>> obstacles_;
 
   //The portals within this room
-  //std::vector<std::vector<Portal>> portals_;
+  std::vector<std::vector<Portal>> portals_;
 
   //The width of this room in grid positions
   double width_;

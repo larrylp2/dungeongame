@@ -32,10 +32,18 @@ void Player::UpdateRoom(Room room) {
 }
 
 void Player::Interact(const Portal& portal) {
-  //location_ = portal.GetDestination().GetLocation();
+  col_ = portal.GetDestination().GetCol();
+  row_ = portal.GetDestination().GetRow();
   std::cout << "Interact" << std::endl;
 }
 
+size_t Player::GetCol() const {
+  return col_;
+}
+
+size_t Player::GetRow() const {
+  return row_;
+}
 
 
 }

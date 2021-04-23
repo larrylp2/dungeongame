@@ -17,13 +17,13 @@ GameEngine::GameEngine() {
   player_.UpdateRoom(current_room_);
 
   //Adds two portals to the current room
-  //Portal portal_one = Portal(glm::vec2(300,300));
-  //Portal portal_two = Portal(glm::vec2(400,400));
-  //portal_one.LinkPortal(portal_two);
-  //portal_two.LinkPortal(portal_one);
+  Portal portal_one = Portal(3, 3);
+  Portal portal_two = Portal(4, 4);
+  portal_one.LinkPortal(portal_two);
+  portal_two.LinkPortal(portal_one);
 
-  //current_room_.AddPortal(portal_one);
-  //current_room_.AddPortal(portal_two);
+  current_room_.AddPortal(portal_one);
+  current_room_.AddPortal(portal_two);
 
   //Obstacle obstacle = Obstacle(glm::vec2(350, 350), 5, kWindowHeight - 2 * kRoomMargin, kRoomMargin);
   //current_room_.AddObstacle(obstacle);
@@ -51,17 +51,9 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
   } else if (event_code == ci::app::KeyEvent::KEY_d) {
     player_.UpdateLocation(0, 1);
   } else if (event_code == ci::app::KeyEvent::KEY_SPACE) {
-    /*for (size_t index = 0; index < current_room_.GetEntities().size(); index++) {
-      if (glm::distance(player_.GetLocation(), current_room_.GetEntities().at(index).GetLocation()) <= 40) {
-        Room current_room = current_room_.GetEntities().at(index).Interact(current_player_);
-      }
-    }*/
-    /*for (size_t index = 0; index < current_room_.GetPortals().size(); index++) {
-      if (glm::distance(player_.GetLocation(), current_room_.GetPortals().at(index).GetLocation()) <= 10) {
-        //player_.Interact(current_room_.GetPortals().at(index));
-        break;
-      }
-    }*/
+    Portal current_portal = current_room_.GetPortals().at(player_.GetRow()).at(player_.GetCol());
+    if (current_portal.IsValid())
+    player_.Interact(current_portal);
   }
 }
 
