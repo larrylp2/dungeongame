@@ -40,13 +40,6 @@ class Portal {
   void Display(size_t grid_size) const;
 
   /**
-   * Gets the destination of the portal.
-   *
-   * @return the portal
-   */
-  Portal GetDestination() const;
-
-  /**
    * Gets the row of this portal
    *
    * @return the row
@@ -70,12 +63,11 @@ class Portal {
   Room* GetRoom() const;
 
 
-
-    /**
-     * Gets if this portal is valid or not.
-     *
-     * @return the validity as a boolean
-     */
+  /**
+   * Gets if this portal is valid or not.
+   *
+   * @return the validity as a boolean
+   */
   bool IsValid() const;
 
   /**

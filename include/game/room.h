@@ -23,12 +23,12 @@ class Room {
 
   /**
    * Constructor for a room of a certain size
-   * @param width the width of the room
    * @param height the height of the room
+   * @param width the width of the room
    * @param margin the margin between room edges and the window edges
    * @param order the order of the room within a level
    */
-  Room(double width, double height, double margin, size_t order);
+  Room(double height, double width, double margin, size_t order);
 
   /**
    * Displays the room within the game
@@ -70,6 +70,22 @@ class Room {
    */
   size_t GetOrder() const;
 
+
+  /**
+   * Gets the height of this room
+   *
+   * @return the height
+   */
+  size_t GetHeight() const;
+
+
+  /**
+   * Gets the width of this room
+   *
+   * @return the width
+   */
+  size_t GetWidth() const;
+
  private:
   //The obstacles within this room
   std::vector<std::vector<Obstacle>> obstacles_;
@@ -78,10 +94,10 @@ class Room {
   //std::vector<std::vector<Portal>> portals_;
 
   //The width of this room in grid positions
-  double width_;
+  size_t width_;
 
   //The height of this room in grid positions
-  double height_;
+  size_t height_;
 
   //The side length of one grid square
   double kGridSide = 40;

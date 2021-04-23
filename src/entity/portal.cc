@@ -30,10 +30,6 @@ void Portal::Display(size_t grid_size) const {
   ci::gl::drawSolidRect(ci::Rectf(left_point, right_point));
 }
 
-Portal Portal::GetDestination() const {
-  return *destination_;
-}
-
 Room* Portal::GetRoom() const {
   return current_room_;
 }
@@ -48,6 +44,7 @@ size_t Portal::GetCol() const {
 }
 
 Room* Portal::Interact(Player* player) {
+  player->UpdateRoom(destination_->GetRoom());
   size_t current_row = player->GetRow();
   size_t current_col = player->GetCol();
   size_t new_row = destination_->GetRow();

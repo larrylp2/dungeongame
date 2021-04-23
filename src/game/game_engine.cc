@@ -14,7 +14,7 @@ GameEngine::GameEngine() {
   Room* room_one = new Room(10, 10, kRoomMargin, 0); //ten by ten grid
   current_room_ = room_one;
   player_ = Player();
-  player_.UpdateRoom(*current_room_);
+  player_.UpdateRoom(current_room_);
 
   //Adds two portals to the current room
   Portal portal_one(3, 3, *current_room_);
@@ -72,9 +72,8 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
     for (size_t index = 0; index < portals.size(); index++) {
       Portal* current_portal = portals.at(index);
       if (current_portal->GetRoom()->GetOrder() == current_room_->GetOrder()) {
-        std::cout << "Portals Found" << std::endl;
         if (player_.GetCol() == current_portal->GetCol() && player_.GetRow() == current_portal->GetRow()) {
-          std::cout << "Portal Found" << std::endl;
+          std::cout << "Portal" << std::endl;
           current_room_ = current_portal->Interact(&player_);
           break;
         }

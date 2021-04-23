@@ -15,9 +15,9 @@ Room::Room() {
 }
 
 
-Room::Room(double width, double height, double margin, size_t order) {
-  width_ = width;
+Room::Room(double height, double width, double margin, size_t order) {
   height_ = height;
+  width_ = width;
   margin_ = margin;
   //portals_ = std::vector<std::vector<Portal>>(height_, std::vector<Portal>(width_));
   obstacles_ = std::vector<std::vector<Obstacle>>(height_, std::vector<Obstacle>(width_));
@@ -30,8 +30,8 @@ void Room::Display() const {
       //Draws a grid from many empty rectangles
       ci::gl::color(ci::Color("white"));
       ci::gl::drawStrokedRect(ci::Rectf(
-              glm::vec2(row * kGridSide,  column * kGridSide),
-              glm::vec2((row + 1) * kGridSide,  (column + 1) * kGridSide)));
+              glm::vec2(column * kGridSide,  row * kGridSide),
+              glm::vec2((column + 1) * kGridSide,  (row + 1) * kGridSide)));
       Obstacle current_obstacle = obstacles_.at(row).at(column);
       if (current_obstacle.IsValid()) {
         current_obstacle.Display(row, column, kGridSide);
@@ -71,6 +71,15 @@ std::vector<std::vector<Obstacle>> Room::GetObstacles() const {
 size_t Room::GetOrder() const {
   return order_;
 }
+
+size_t Room::GetHeight() const {
+  return height_;
+}
+
+size_t Room::GetWidth() const {
+  return width_;
+}
+
 
 /*
 std::vector<std::vector<Portal>> Room::GetPortals() const {

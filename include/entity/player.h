@@ -38,7 +38,7 @@ class Player {
    *
    * @param room the current room of the player
    */
-  void UpdateRoom(Room& room);
+  void UpdateRoom(Room* room);
 
   /**
    * Get player column.
