@@ -6,28 +6,27 @@
 
 namespace finalproject {
 
-Obstacle::Obstacle(glm::vec2 location, double width, double height, double margin) {
-  location_ = location;
-  width_ = width;
-  height_ = height;
-  margin_ = margin;
+Obstacle::Obstacle() {
+  valid_ = false;
 }
 
-glm::vec2 Obstacle::GetLocation() const {
-  return location_;
-}
-
-std::string Obstacle::GetName() const {
-  return "Obstacle";
-}
-
-void Obstacle::Display() const {
-  ci::gl::color(ci::Color("blue"));
-  glm::vec2 left_point(location_.x - width_ / 2, location_.y - height_ / 2 + margin_);
-  glm::vec2 right_point(location_.x + width_ / 2, location_.y + height_ / 2 + margin_);
+void Obstacle::Display(size_t row, size_t col, size_t grid_size) const {
+  ci::gl::color(ci::Color("white"));
+  glm::vec2 left_point(col * grid_size, row * grid_size);
+  glm::vec2 right_point(col * grid_size + grid_size, row * grid_size + grid_size);
   ci::gl::drawSolidRect(ci::Rectf(left_point, right_point));
 }
 
+bool Obstacle::IsValid() const {
+  return valid_;
+}
 
+void Obstacle::MakeValid() {
+  valid_ = true;
+}
+
+void Obstacle::MakeInvalid() {
+  valid_ = false;
+}
 
 }

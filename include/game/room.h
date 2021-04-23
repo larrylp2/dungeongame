@@ -5,6 +5,7 @@
 #pragma once
 
 #include <vector>
+#include <tuple>
 #include "entity/portal.h"
 #include "entity/obstacle.h"
 
@@ -38,10 +39,8 @@ class Room {
    * Adds an obstacle to this room
    *
    * @param obstacle to add
-   * @param column the column of the portal
-   * @param row the row of the portal
    */
-  //void AddObstacle(const Obstacle& obstacle, size_t column, size_t row);
+  void DesignateObstacles(const std::vector<std::tuple<size_t, size_t>>& coordinates);
 
 
   /**
@@ -51,6 +50,10 @@ class Room {
    */
   void AddPortal(Portal& portal);
 
+  /**
+   * Gets the obstacles within the room
+   */
+  std::vector<std::vector<Obstacle>> GetObstacles() const;
 
   /**
    * Gets the portals within the room
@@ -64,7 +67,7 @@ class Room {
 
  private:
   //The obstacles within this room
-  //std::vector<std::vector<Obstacle>> obstacles_;
+  std::vector<std::vector<Obstacle>> obstacles_;
 
   //The portals within this room
   std::vector<std::vector<Portal>> portals_;

@@ -7,7 +7,6 @@
 namespace finalproject {
 
 Player::Player() {
-  current_room_ = Room();
   row_ = 0;
   col_ = 0;
 }
@@ -23,12 +22,18 @@ void Player::Display() const {
 }
 
 void Player::UpdateLocation(size_t row, size_t col) {
-  row_ += row;
-  col_ += col;
+  size_t new_row = row_ + row;
+  size_t new_col = col_ + col;
+  if (current_room_->GetObstacles().at(new_row).at(new_col).IsValid()) {
+    std::cout << "Cannot Move There" << std::endl;
+  } else {
+    row_ = new_row;
+    col_ = new_col;
+  }
 }
 
-void Player::UpdateRoom(Room room) {
-  current_room_ = room;
+void Player::UpdateRoom(Room& room) {
+  current_room_ = &room;
 }
 
 void Player::Interact(const Portal& portal) {

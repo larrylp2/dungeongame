@@ -11,23 +11,17 @@ class Obstacle {
  public:
   Obstacle();
 
-  Obstacle(glm::vec2 location, double width, double height, double margin);
+  void Display(size_t row, size_t col, size_t grid_size) const;
 
-  glm::vec2 GetLocation() const;
+  bool IsValid() const;
 
-  std::string GetName() const;
+  void MakeValid();
 
-  void Display() const;
+  void MakeInvalid();
 
  private:
-  double width_;
 
-  double height_;
-
-  glm::vec2 location_;
-
-  double margin_;
-
+  bool valid_;
 
 };
 

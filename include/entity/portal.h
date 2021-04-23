@@ -74,7 +74,7 @@ class Portal {
 
   size_t row_;
 
-  bool valid_ = false;
+  bool valid_;
 };
 
 }

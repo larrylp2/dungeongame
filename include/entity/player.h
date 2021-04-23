@@ -39,7 +39,7 @@ class Player {
    *
    * @param room the current room of the player
    */
-  void UpdateRoom(Room room);
+  void UpdateRoom(Room& room);
 
   /**
    * Get player column.
@@ -63,7 +63,7 @@ class Player {
 
  private:
   // The current room of the player
-  Room current_room_;
+  Room* current_room_;
 
   // The row of the player
   size_t row_;

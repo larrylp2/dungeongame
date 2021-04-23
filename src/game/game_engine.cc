@@ -18,15 +18,18 @@ GameEngine::GameEngine() {
 
   //Adds two portals to the current room
   Portal portal_one = Portal(3, 3);
-  Portal portal_two = Portal(4, 4);
+  Portal portal_two = Portal(7, 7);
   portal_one.LinkPortal(portal_two);
   portal_two.LinkPortal(portal_one);
 
   current_room_.AddPortal(portal_one);
   current_room_.AddPortal(portal_two);
 
-  //Obstacle obstacle = Obstacle(glm::vec2(350, 350), 5, kWindowHeight - 2 * kRoomMargin, kRoomMargin);
-  //current_room_.AddObstacle(obstacle);
+  std::vector<std::tuple<size_t, size_t>> terrain = {std::make_tuple(1, 2),
+                                                     std::make_tuple(2, 3),
+                                                     std::make_tuple(3, 4),
+                                                     std::make_tuple(4, 5)};
+  current_room_.DesignateObstacles(terrain);
 
   //level_.AddRoom(current_room_);
   //level_.AddRoom(room_two);
