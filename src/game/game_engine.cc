@@ -9,8 +9,11 @@
 namespace finalproject {
 
 GameEngine::GameEngine() {
-  // Placeholder/test to see if cinder app visualization works from cmake configuration
   ci::app::setWindowSize(kWindowWidth, kWindowHeight);
+  GenerateLevels();
+}
+
+void GameEngine::GenerateLevels() {
   Room* room_one = new Room(10, 10, kRoomMargin, 0); //ten by ten grid
   current_room_ = room_one;
   player_ = Player();
@@ -42,7 +45,9 @@ GameEngine::GameEngine() {
 
   level_.AddRoom(current_room_);
   level_.AddRoom(room_two);
+  //Later replace with class that helps with random level generation
 }
+
 
 void GameEngine::draw() {
   ci::Color background_color("black");
