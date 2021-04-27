@@ -56,9 +56,6 @@ class Level {
    */
   std::vector<std::vector<Portal*>> GetPortals() const;
 
-
-
-
  private:
   //The maximum number of rooms within this floor
   size_t room_cap_;

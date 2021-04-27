@@ -23,7 +23,6 @@ std::vector<std::vector<Portal*>> Level::GetPortals() const {
   return portals_;
 }
 
-
 void Level::AddRoom(Room* room) {
   rooms_.at(room->GetOrder()) = room;
   room_num_++;

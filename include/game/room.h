@@ -88,7 +88,7 @@ class Room {
 
  private:
   //The obstacles within this room
-  std::vector<std::vector<Obstacle>> obstacles_;
+  std::vector<std::vector<Obstacle>> obstacles_; //Use obstacle pointers
 
   //The portals within this room
   //std::vector<std::vector<Portal>> portals_;
