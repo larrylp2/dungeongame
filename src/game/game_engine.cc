@@ -68,11 +68,6 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
   } else if (event_code == ci::app::KeyEvent::KEY_d) {
     player_.UpdateLocation(0, 1);
   } else if (event_code == ci::app::KeyEvent::KEY_SPACE) {
-    /*
-    Portal current_portal = current_room_.GetPortals().at(player_.GetRow()).at(player_.GetCol());
-    if (current_portal.IsValid())
-    player_.Interact(current_portal);
-     */
     std::vector<Portal*> portals = level_.GetPortals().at(current_room_->GetOrder());
     for (size_t index = 0; index < portals.size(); index++) {
       Portal* current_portal = portals.at(index);
@@ -93,4 +88,4 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
 
 
 
-}
+} // namespace finalproject

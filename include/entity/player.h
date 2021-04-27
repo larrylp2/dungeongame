@@ -54,14 +54,6 @@ class Player {
    */
   size_t GetRow() const;
 
-
-  /**
-   * Handles player interaction with a portal, updating player location and returning new room.
-   */
-  //void Interact(const Portal& portal);
-
-
-
  private:
   // The current room of the player
   Room* current_room_;

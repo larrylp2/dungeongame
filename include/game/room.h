@@ -42,23 +42,10 @@ class Room {
    */
   void DesignateObstacles(const std::vector<std::tuple<size_t, size_t>>& coordinates);
 
-
-  /**
-   * Adds a portal to this room
-   *
-   * @param portal the portal to add to this room
-   */
-  //void AddPortal(Portal& portal);
-
   /**
    * Gets the obstacles within the room
    */
   std::vector<std::vector<Obstacle*>> GetObstacles() const;
-
-  /**
-   * Gets the portals within the room
-   */
-  //std::vector<std::vector<Portal>> GetPortals() const;
 
   /**
    * Gets the grid side size
@@ -88,10 +75,7 @@ class Room {
 
  private:
   //The obstacles within this room
-  std::vector<std::vector<Obstacle*>> obstacles_; //Use obstacle pointers
-
-  //The portals within this room
-  //std::vector<std::vector<Portal>> portals_;
+  std::vector<std::vector<Obstacle*>> obstacles_;
 
   //The width of this room in grid positions
   size_t width_;

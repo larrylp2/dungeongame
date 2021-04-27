@@ -10,7 +10,6 @@ Room::Room() {
   width_ = 0;
   height_ = 0;
   margin_ = 0;
-  //portals_ = std::vector<std::vector<Portal>>(height_, std::vector<Portal>(width_));
   obstacles_ = std::vector<std::vector<Obstacle*>>(height_, std::vector<Obstacle*>(width_));
 }
 
@@ -19,7 +18,6 @@ Room::Room(double height, double width, double margin, size_t order) {
   height_ = height;
   width_ = width;
   margin_ = margin;
-  //portals_ = std::vector<std::vector<Portal>>(height_, std::vector<Portal>(width_));
   obstacles_ = std::vector<std::vector<Obstacle*>>(height_, std::vector<Obstacle*>(width_));
   order_ = order;
 }
@@ -36,11 +34,6 @@ void Room::Display() const {
       if (current_obstacle != nullptr) {
         current_obstacle->Display(row, column, kGridSide);
       }
-      /*
-      Portal current_portal = portals_.at(row).at(column);
-      if (current_portal.IsValid()) {
-        current_portal.Display(kGridSide);
-      } */
     }
   }
 }
@@ -48,14 +41,6 @@ void Room::Display() const {
 double Room::GetGridSize() const {
   return kGridSide;
 }
-
-
-/*
-void Room::AddPortal(Portal& portal) {
-  size_t row = portal.GetRow();
-  size_t col = portal.GetCol();
-  portals_.at(row).at(col) = portal;
-}*/
 
 void Room::DesignateObstacles(const std::vector<std::tuple<size_t, size_t>>& coordinates) {
   Obstacle obstacle = Obstacle();
@@ -82,12 +67,4 @@ size_t Room::GetWidth() const {
 }
 
 
-/*
-std::vector<std::vector<Portal>> Room::GetPortals() const {
-  return(portals_);
-}*/
-
-
-
-
-}
+} // namespace finalproject

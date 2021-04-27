@@ -46,7 +46,6 @@ class Portal {
    */
   size_t GetRow() const;
 
-
   /**
    * Gets the column of this portal
    *
@@ -54,21 +53,12 @@ class Portal {
    */
   size_t GetCol() const;
 
-
   /**
    * Gets the current room of this portal
    *
    * @return the room
    */
   Room* GetRoom() const;
-
-
-  /**
-   * Gets if this portal is valid or not.
-   *
-   * @return the validity as a boolean
-   */
-  bool IsValid() const;
 
   /**
    * Handles portal interaction by a player
@@ -88,8 +78,6 @@ class Portal {
   size_t col_;
 
   size_t row_;
-
-  //bool valid_;
 };
 
 }

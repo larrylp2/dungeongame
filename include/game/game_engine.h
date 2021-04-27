@@ -47,9 +47,6 @@ class GameEngine : public ci::app::App {
   //The current room displayed on the screen
   Room* current_room_;
 
-  //All of the portals within the game, with each vector of portals representing the portals within the game
-  //std::vector<std::vector<Portal>> portals_;
-
   //All of the levels within the game (need to improve level class before adding)
   std::vector<Level> levels_;
 
