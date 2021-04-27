@@ -11,7 +11,7 @@ Room::Room() {
   height_ = 0;
   margin_ = 0;
   //portals_ = std::vector<std::vector<Portal>>(height_, std::vector<Portal>(width_));
-  obstacles_ = std::vector<std::vector<Obstacle>>(height_, std::vector<Obstacle>(width_));
+  obstacles_ = std::vector<std::vector<Obstacle*>>(height_, std::vector<Obstacle*>(width_));
 }
 
 
@@ -20,7 +20,7 @@ Room::Room(double height, double width, double margin, size_t order) {
   width_ = width;
   margin_ = margin;
   //portals_ = std::vector<std::vector<Portal>>(height_, std::vector<Portal>(width_));
-  obstacles_ = std::vector<std::vector<Obstacle>>(height_, std::vector<Obstacle>(width_));
+  obstacles_ = std::vector<std::vector<Obstacle*>>(height_, std::vector<Obstacle*>(width_));
   order_ = order;
 }
 
@@ -32,9 +32,9 @@ void Room::Display() const {
       ci::gl::drawStrokedRect(ci::Rectf(
               glm::vec2(column * kGridSide,  row * kGridSide),
               glm::vec2((column + 1) * kGridSide,  (row + 1) * kGridSide)));
-      Obstacle current_obstacle = obstacles_.at(row).at(column);
-      if (current_obstacle.IsValid()) {
-        current_obstacle.Display(row, column, kGridSide);
+      Obstacle* current_obstacle = obstacles_.at(row).at(column);
+      if (current_obstacle != nullptr) {
+        current_obstacle->Display(row, column, kGridSide);
       }
       /*
       Portal current_portal = portals_.at(row).at(column);
@@ -58,13 +58,14 @@ void Room::AddPortal(Portal& portal) {
 }*/
 
 void Room::DesignateObstacles(const std::vector<std::tuple<size_t, size_t>>& coordinates) {
+  Obstacle obstacle = Obstacle();
   for (size_t index = 0; index < coordinates.size(); index++) {
     std::tuple<size_t, size_t> pair = coordinates.at(index);
-    obstacles_.at(std::get<0>(pair)).at(std::get<1>(pair)).MakeValid();
+    obstacles_.at(std::get<0>(pair)).at(std::get<1>(pair)) = &obstacle;
   }
 }
 
-std::vector<std::vector<Obstacle>> Room::GetObstacles() const {
+std::vector<std::vector<Obstacle*>> Room::GetObstacles() const {
   return obstacles_;
 }
 

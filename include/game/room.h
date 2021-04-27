@@ -53,7 +53,7 @@ class Room {
   /**
    * Gets the obstacles within the room
    */
-  std::vector<std::vector<Obstacle>> GetObstacles() const;
+  std::vector<std::vector<Obstacle*>> GetObstacles() const;
 
   /**
    * Gets the portals within the room
@@ -88,7 +88,7 @@ class Room {
 
  private:
   //The obstacles within this room
-  std::vector<std::vector<Obstacle>> obstacles_; //Use obstacle pointers
+  std::vector<std::vector<Obstacle*>> obstacles_; //Use obstacle pointers
 
   //The portals within this room
   //std::vector<std::vector<Portal>> portals_;

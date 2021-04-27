@@ -26,7 +26,7 @@ void Player::UpdateLocation(size_t row, size_t col) {
   size_t new_col = col_ + col;
   if (new_row >= current_room_->GetHeight() || new_col >= current_room_->GetWidth() || new_row < 0 || new_col < 0) {
     std::cout << "Reached Edge of Room" << std::endl;
-  } else if (current_room_->GetObstacles().at(new_row).at(new_col).IsValid()){
+  } else if (current_room_->GetObstacles().at(new_row).at(new_col) != nullptr){
     std::cout << "Cannot Move There" << std::endl;
   } else {
     row_ = new_row;

@@ -23,27 +23,6 @@ class Obstacle {
    */
   void Display(size_t row, size_t col, size_t grid_size) const;
 
-  /**
-   * Checks if this obstacle is valid/blocking
-   *
-   * @return a boolean if it is or not
-   */
-  bool IsValid() const;
-
-  /**
-   * Makes the obstacle valid.
-   */
-  void MakeValid();
-
-  /**
-   * Makes the obstacle invalid.
-   */
-  void MakeInvalid();
-
- private:
-  //Boolean if the obstacle is valid
-  bool valid_;
-
 };
 
 
