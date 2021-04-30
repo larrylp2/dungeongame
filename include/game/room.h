@@ -101,6 +101,16 @@ class Room {
   void RemoveProj(size_t index);
 
   /**
+   * Checks and resizes vector of projectile pointers
+   */
+  void CleanProjectiles();
+
+  /**
+   * Checks projectile collisions.
+   */
+  void CheckProjectileCollisions();
+
+  /**
    * Gets the grid side size
    */
   double GetGridSize() const;

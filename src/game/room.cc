@@ -49,16 +49,17 @@ void Room::Display() {
       }
     }
   }
+  CheckProjectileCollisions();
   for (size_t index = 0; index < projectiles_.size(); index++) {
     Projectile* current_proj = projectiles_.at(index);
     if (current_proj != nullptr) {
       size_t remaining_range = current_proj->Display();
       if (remaining_range <= 0) {
         RemoveProj(index);
-        std::cout << "Delete" << std::endl;
       }
     }
   }
+  CleanProjectiles();
 
 }
 
@@ -77,6 +78,49 @@ void Room::AddProjectile(Projectile* proj) {
 void Room::RemoveProj(size_t index) {
   delete projectiles_.at(index);
   projectiles_.at(index) = nullptr;
+}
+
+void Room::CleanProjectiles() {
+  bool all_null = true;
+  for (size_t proj = 0; proj < projectiles_.size(); proj++) {
+    if (projectiles_.at(proj) != nullptr) {
+      all_null = false;
+      break;
+    }
+  }
+  if (all_null) {
+    projectiles_ = std::vector<Projectile*>(0);
+  }
+}
+
+
+void Room::CheckProjectileCollisions() {
+  for (size_t index = 0; index < projectiles_.size(); index++) {
+    Projectile* current_proj = projectiles_.at(index);
+    if (current_proj != nullptr) {
+      size_t row = current_proj->GetRow();
+      size_t col = current_proj->GetCol();
+      double strength = current_proj->GetStrength();
+
+      Enemy* current_enemy = enemies_.at(row).at(col);
+      if (current_enemy != nullptr) {
+        double remaining_hp = current_enemy->TakeDamage(strength);
+        std::cout << "Hit!" << std::endl;
+        if (remaining_hp <= 0) {
+          std::cout << "Killed" << std::endl;
+          delete current_enemy;
+          enemies_.at(row).at(col) = nullptr;
+        }
+        RemoveProj(index);
+      }
+      Obstacle* current_obstacle = obstacles_.at(row).at(col);
+      if (current_obstacle != nullptr) {
+        std::cout << "Blocked" << std::endl;
+        RemoveProj(index);
+      }
+    }
+  }
+  CleanProjectiles();
 }
 
 
