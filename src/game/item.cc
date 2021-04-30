@@ -4,13 +4,14 @@
 #include "game/item.h"
 namespace finalproject {
 
-Item::Item() {
-  health_mod_ = 0;
-  attack_mod_ = 0;
-  defense_mod_ = 0;
-  speed_mod_ = 0;
-  dexterity_mod_ = 0;
-  vitality_mod_ = 0;
+Item::Item(std::string name, size_t health, size_t attack, size_t defense, size_t range, size_t shot, size_t vitality) {
+  item_name_ = name;
+  health_mod_ = health;
+  attack_mod_ = attack;
+  defense_mod_ = defense;
+  range_mod_ = range;
+  shot_mod_ = shot;
+  vitality_mod_ = vitality;
 }
 
 void Item::Display(size_t row, size_t col, size_t grid_size) const {
@@ -24,11 +25,54 @@ void Item::Display(size_t row, size_t col, size_t grid_size) const {
   ci::gl::drawSolidRect(ci::Rectf(left_point_two, right_point_two));
 }
 
-std::string Item::GetName() const {
-  return item_name_;
+std::string Item::GetSummary() const {
+  std::string info;
+  info.append(item_name_);
+  info.append("  |  ");
+  info.append("HP: ");
+  info.append(std::to_string(health_mod_));
+  info.append("  ");
+  info.append("ATK: ");
+  info.append(std::to_string(attack_mod_));
+  info.append("  ");
+  info.append("DEF: ");
+  info.append(std::to_string(defense_mod_));
+  info.append("  ");
+  info.append("RNG: ");
+  info.append(std::to_string(range_mod_));
+  info.append("  ");
+  info.append("SHOT: ");
+  info.append(std::to_string(shot_mod_));
+  info.append("  ");
+  info.append("VIT: ");
+  info.append(std::to_string(vitality_mod_));
+  info.append("  ");
+  return info;
 }
 
+size_t Item::GetHealth() const {
+  return health_mod_;
+}
 
+size_t Item::GetAttack() const {
+  return attack_mod_;
+}
+
+size_t Item::GetDefense() const {
+  return defense_mod_;
+}
+
+size_t Item::GetRange() const {
+  return range_mod_;
+}
+
+size_t Item::GetShot() const {
+  return shot_mod_;
+}
+
+size_t Item::GetVitality() const {
+  return vitality_mod_;
+}
 
 
 }

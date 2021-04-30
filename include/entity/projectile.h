@@ -29,9 +29,11 @@ class Projectile {
   /**
    * Displays the projectile, updating and returning the remaining range it can travel
    *
+   * @param room_width the width of the room grid
+   * @param room_height the height of the room grid
    * @return the remaining travel range of the projectile
    */
-  size_t Display();
+  size_t Display(size_t room_width, size_t room_height);
 
   /**
    * Update location

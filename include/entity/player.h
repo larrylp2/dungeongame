@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include <vector>
+#include "cinder/gl/gl.h"
 #include "game/item.h"
 #include "game/room.h"
 
@@ -88,6 +88,18 @@ class Player {
 
   // The inventory of the player
   std::vector<Item*> inventory_;
+
+  size_t health_;
+
+  size_t attack_;
+
+  size_t defense_;
+
+  size_t range_;
+
+  size_t shot_;
+
+  size_t vitality_;
 
 };
 

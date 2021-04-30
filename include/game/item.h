@@ -17,9 +17,17 @@ class Item {
 
  public:
   /**
-   * Default constructor for item.
+   * Constructor for an item.
+   *
+   * @param name
+   * @param health
+   * @param attack
+   * @param defense
+   * @param speed
+   * @param shot
+   * @param vitality
    */
-  Item();
+  Item(std::string name, size_t health, size_t attack, size_t defense, size_t speed, size_t shot, size_t vitality);
 
   /**
    * Displays the item.
@@ -31,33 +39,75 @@ class Item {
   void Display(size_t row, size_t col, size_t grid_size) const;
 
   /**
-   * Returns the name of this item
+   * Returns a string representation summarizing this item's information
    *
-   * @return the string name of this item
+   * @return a string describing this item
    */
-  std::string GetName() const;
+  std::string GetSummary() const;
 
- private:
+  /**
+   * Returns the item's health mod
+   *
+   * @return health mod
+   */
+  size_t GetHealth() const;
 
-  std::string item_name_ = "default";
+  /**
+   * Returns the item's attack mod
+   *
+   * @return attack mod
+   */
+  size_t GetAttack() const;
+
+  /**
+   * Returns the item's defense mod
+   *
+   * @return defense mod
+   */
+  size_t GetDefense() const;
+
+  /**
+   * Returns the item's range mod
+   *
+   * @return range mod
+   */
+  size_t GetRange() const;
+
+  /**
+   * Returns the item's shot speed mod
+   *
+   * @return shot mod
+   */
+  size_t GetShot() const;
+
+  /**
+   * Returns the item's vitality mod
+   *
+   * @return vitality mod
+   */
+  size_t GetVitality() const;
+
+private:
+
+  std::string item_name_;
 
   //How much this item alters the health of the player
-  double health_mod_;
+  size_t health_mod_;
 
   //How much this item alters the attack of the player
-  double attack_mod_;
+  size_t attack_mod_;
 
   //How much this item alters the defense of the player
-  double defense_mod_;
+  size_t defense_mod_;
 
-  //How much this item alters the speed of the player
-  double speed_mod_;
+  //How much this item alters the range of the player
+  size_t range_mod_;
 
-  //How much this item alters the dexterity of the player
-  double dexterity_mod_;
+  //How much this item alters the shot speed of the player
+  size_t shot_mod_;
 
   //How much this item alters the vitality of the player
-  double vitality_mod_;
+  size_t vitality_mod_;
 
 
 

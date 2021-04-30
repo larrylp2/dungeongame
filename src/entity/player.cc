@@ -10,6 +10,12 @@ namespace finalproject {
 Player::Player() {
   row_ = 0;
   col_ = 0;
+  health_ = 100;
+  attack_ = 20;
+  defense_ = 0;
+  range_ = 200;
+  shot_ = 5;
+  vitality_ = 1;
 }
 
 void Player::Display() const {
@@ -41,7 +47,12 @@ void Player::UpdateRoom(Room* room) {
 
 void Player::AddItem(Item* item) {
   inventory_.push_back(item);
-  //Add mechanics to update player stats
+  health_ += item->GetHealth();
+  attack_ += item->GetAttack();
+  defense_ += item->GetDefense();
+  range_ += item->GetRange();
+  shot_ += item->GetShot();
+  vitality_ += item->GetVitality();
 }
 
 
@@ -59,10 +70,7 @@ std::vector<Item*> Player::GetInventory() const {
 
 void Player::FireProjectile(size_t direction) const {
   size_t grid = 40;
-  size_t range = 200;
-  size_t strength = 20;
-  float speed = 5;
-  Projectile* proj = new Projectile(col_ * grid + grid / 2, row_ * grid + grid / 2, row_, col_, direction, range, strength, true, grid, speed);
+  Projectile* proj = new Projectile(col_ * grid + grid / 2, row_ * grid + grid / 2, row_, col_, direction, range_, attack_, true, grid, shot_);
   current_room_->AddProjectile(proj);
 }
 

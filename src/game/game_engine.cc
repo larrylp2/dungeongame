@@ -43,7 +43,7 @@ void GameEngine::GenerateLevels() {
   level_.AddPortal(portal_three);
   level_.AddPortal(portal_four);
 
-  Item* empty_item = new Item();
+  Item* empty_item = new Item("Space Laser", 0, 10, 0, 50, 5, 0);
   room_one->AddItem(empty_item, 4, 9);
 
   Enemy* default_enemy = new Enemy();
@@ -143,7 +143,7 @@ void GameEngine::DisplayInventory() const {
     ci::gl::drawStrokedRect(ci::Rectf(
             glm::vec2(kRoomMargin, kRoomMargin * (index + 1)),
             glm::vec2(kWindowWidth - kRoomMargin,kRoomMargin + kRoomMargin * (index + 1))));
-    ci::gl::drawString(inventory_items.at(index)->GetName(), glm::vec2(kRoomMargin + 5, kRoomMargin * (index + 1) + kRoomMargin / 2));
+    ci::gl::drawString(inventory_items.at(index)->GetSummary(), glm::vec2(kRoomMargin + 5, kRoomMargin * (index + 1) + kRoomMargin / 2));
   }
 }
 

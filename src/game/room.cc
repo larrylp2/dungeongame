@@ -53,7 +53,7 @@ void Room::Display() {
   for (size_t index = 0; index < projectiles_.size(); index++) {
     Projectile* current_proj = projectiles_.at(index);
     if (current_proj != nullptr) {
-      size_t remaining_range = current_proj->Display();
+      size_t remaining_range = current_proj->Display(width_, height_);
       if (remaining_range <= 0) {
         RemoveProj(index);
       }

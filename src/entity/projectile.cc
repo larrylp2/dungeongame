@@ -18,11 +18,15 @@ Projectile::Projectile(float x, float y, size_t row, size_t col, size_t directio
   speed_ = speed;
 }
 
-size_t Projectile::Display() {
+size_t Projectile::Display(size_t room_width, size_t room_height) {
   UpdateLocation();
-  glm::vec2 center_point(x_, y_);
-  ci::gl::drawSolidCircle(center_point, strength_ / 2);
-  return range_;
+  if (row_ < 0 || col_ < 0 || row_ >= room_height || col_ >= room_width) { //Catches projectiles leaving the room
+    return 0;
+  } else {
+    glm::vec2 center_point(x_, y_);
+    ci::gl::drawSolidCircle(center_point, strength_ / 2);
+    return range_;
+  }
 }
 
 void Projectile::UpdateLocation() {
