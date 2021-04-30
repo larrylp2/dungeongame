@@ -43,6 +43,9 @@ void GameEngine::GenerateLevels() {
   level_.AddPortal(&portal_three);
   level_.AddPortal(&portal_four);
 
+  Item emptyItem = Item();
+  room_one->AddItem(&emptyItem, 4, 9);
+
   level_.AddRoom(current_room_);
   level_.AddRoom(room_two);
   //Later replace with class that helps with random level generation

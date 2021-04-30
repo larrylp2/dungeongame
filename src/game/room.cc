@@ -11,6 +11,8 @@ Room::Room() {
   height_ = 0;
   margin_ = 0;
   obstacles_ = std::vector<std::vector<Obstacle*>>(height_, std::vector<Obstacle*>(width_));
+  items_ = std::vector<std::vector<Item*>>(height_, std::vector<Item*>(width_));
+  order_ = 0;
 }
 
 
@@ -19,6 +21,7 @@ Room::Room(double height, double width, double margin, size_t order) {
   width_ = width;
   margin_ = margin;
   obstacles_ = std::vector<std::vector<Obstacle*>>(height_, std::vector<Obstacle*>(width_));
+  items_ = std::vector<std::vector<Item*>>(height_, std::vector<Item*>(width_));
   order_ = order;
 }
 
@@ -34,9 +37,18 @@ void Room::Display() const {
       if (current_obstacle != nullptr) {
         current_obstacle->Display(row, column, kGridSide);
       }
+      Item* current_item = items_.at(row).at(column);
+      if (current_item != nullptr) {
+        current_item->Display(row, column, kGridSide);
+      }
     }
   }
 }
+
+void Room::AddItem(Item* item, size_t row, size_t col) {
+  items_.at(row).at(col) = item;
+}
+
 
 double Room::GetGridSize() const {
   return kGridSide;

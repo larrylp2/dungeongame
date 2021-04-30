@@ -7,6 +7,7 @@
 #include <vector>
 #include <tuple>
 #include "entity/obstacle.h"
+#include "game/item.h"
 
 namespace finalproject {
 
@@ -47,6 +48,12 @@ class Room {
    */
   std::vector<std::vector<Obstacle*>> GetObstacles() const;
 
+
+  /**
+   * Adds an item to the room at a certain position
+   */
+  void AddItem(Item* item, size_t row, size_t col);
+
   /**
    * Gets the grid side size
    */
@@ -76,6 +83,9 @@ class Room {
  private:
   //The obstacles within this room
   std::vector<std::vector<Obstacle*>> obstacles_;
+
+  //The items within this room
+  std::vector<std::vector<Item*>> items_;
 
   //The width of this room in grid positions
   size_t width_;

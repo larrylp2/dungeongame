@@ -4,6 +4,10 @@
 
 #pragma once
 
+#include "cinder/app/App.h"
+#include "cinder/app/RendererGl.h"
+#include "cinder/gl/gl.h"
+
 namespace finalproject {
 
 /**
@@ -16,6 +20,15 @@ class Item {
    * Default constructor for item.
    */
   Item();
+
+  /**
+   * Displays the item.
+   *
+   * @param row the row to display
+   * @param col the column to display
+   * @param grid_size the size of the grid square occupied by the item
+   */
+  void Display(size_t row, size_t col, size_t grid_size) const;
 
  private:
   //How much this item alters the health of the player
