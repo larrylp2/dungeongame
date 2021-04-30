@@ -36,15 +36,18 @@ void GameEngine::GenerateLevels() {
 
   //Need to add constructors, destructors, etc
   Room* room_two = new Room(2, 8, kRoomMargin, 1);
-  Portal portal_three = Portal(9, 9, *current_room_);
-  Portal portal_four = Portal(0, 1, *room_two);
-  portal_three.LinkPortal(portal_four);
-  portal_four.LinkPortal(portal_three);
-  level_.AddPortal(&portal_three);
-  level_.AddPortal(&portal_four);
+  Portal* portal_three = new Portal(9, 9, *current_room_);
+  Portal* portal_four = new Portal(0, 1, *room_two);
+  portal_three->LinkPortal(*portal_four);
+  portal_four->LinkPortal(*portal_three);
+  level_.AddPortal(portal_three);
+  level_.AddPortal(portal_four);
 
-  Item emptyItem = Item();
-  room_one->AddItem(&emptyItem, 4, 9);
+  Item* empty_item = new Item();
+  room_one->AddItem(empty_item, 4, 9);
+
+  Enemy* default_enemy = new Enemy();
+  room_one->AddEnemy(default_enemy, 9, 1);
 
   level_.AddRoom(current_room_);
   level_.AddRoom(room_two);
@@ -122,13 +125,13 @@ void GameEngine::DisplayInventory() const {
           glm::vec2(kRoomMargin, kRoomMargin),
           glm::vec2(kWindowWidth - kRoomMargin, kWindowHeight - kRoomMargin)));
 
-
+  ci::gl::drawStringCentered("inventory", glm::vec2(kWindowWidth / 2, kRoomMargin / 2));
   std::vector<Item*> inventory_items = player_.GetInventory();
   for (size_t index = 0; index < inventory_items.size(); index++) {
     ci::gl::drawStrokedRect(ci::Rectf(
             glm::vec2(kRoomMargin, kRoomMargin * (index + 1)),
             glm::vec2(kWindowWidth - kRoomMargin,kRoomMargin + kRoomMargin * (index + 1))));
-    ci::gl::drawString(inventory_items.at(index)->GetName(), glm::vec2(kRoomMargin, kRoomMargin * (index + 1) + kRoomMargin / 2));
+    ci::gl::drawString(inventory_items.at(index)->GetName(), glm::vec2(kRoomMargin + 5, kRoomMargin * (index + 1) + kRoomMargin / 2));
   }
 }
 

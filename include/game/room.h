@@ -8,6 +8,7 @@
 #include <tuple>
 #include "entity/obstacle.h"
 #include "game/item.h"
+#include "entity/enemy.h"
 
 namespace finalproject {
 
@@ -54,6 +55,11 @@ class Room {
   std::vector<std::vector<Item*>> GetItems() const;
 
   /**
+   * Gets the enemies within the room
+   */
+  std::vector<std::vector<Enemy*>> GetEnemies() const;
+
+  /**
    * Adds an item to the room at a certain position
    *
    * @param item the item to add to the room
@@ -63,11 +69,20 @@ class Room {
   void AddItem(Item* item, size_t row, size_t col);
 
   /**
-   * Removes an item from the room
+   * Adds an enemy to the room at a certain position
    *
-   * @param row the row location of the item
-   * @param col the col location of the item
+   * @param enemy the enemy to add to the room
+   * @param row the row of the item
+   * @param col the column of the item
    */
+  void AddEnemy(Enemy* enemy, size_t row, size_t col);
+
+    /**
+     * Removes an item from the room
+     *
+     * @param row the row location of the item
+     * @param col the col location of the item
+     */
   void RemoveItem(size_t row, size_t col);
 
   /**
@@ -102,6 +117,9 @@ class Room {
 
   //The items within this room
   std::vector<std::vector<Item*>> items_;
+
+  //The enemies within this room
+  std::vector<std::vector<Enemy*>> enemies_;
 
   //The width of this room in grid positions
   size_t width_;

@@ -53,7 +53,8 @@ get_filename_component(APP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/" ABSOLUTE)
 include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 
 # Need to add more as I add more files to the entity directory
-list(APPEND ENTITY_SOURCE_FILES src/entity/obstacle.cc
+list(APPEND ENTITY_SOURCE_FILES src/entity/enemy.cc
+                                src/entity/obstacle.cc
                                 src/entity/player.cc
                                 src/entity/portal.cc)
 
