@@ -56,7 +56,8 @@ include("${CINDER_PATH}/proj/cmake/modules/cinderMakeApp.cmake")
 list(APPEND ENTITY_SOURCE_FILES src/entity/enemy.cc
                                 src/entity/obstacle.cc
                                 src/entity/player.cc
-                                src/entity/portal.cc)
+                                src/entity/portal.cc
+                                src/entity/projectile.cc)
 
 list(APPEND SOURCE_FILES    ${ENTITY_SOURCE_FILES}
                             src/game/game_engine.cc

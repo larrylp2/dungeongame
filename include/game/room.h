@@ -9,6 +9,7 @@
 #include "entity/obstacle.h"
 #include "game/item.h"
 #include "entity/enemy.h"
+#include "entity/projectile.h"
 
 namespace finalproject {
 
@@ -35,7 +36,7 @@ class Room {
   /**
    * Displays the room within the game
    */
-  void Display() const;
+  void Display();
 
   /**
    * Adds an obstacle to this room
@@ -77,13 +78,27 @@ class Room {
    */
   void AddEnemy(Enemy* enemy, size_t row, size_t col);
 
-    /**
-     * Removes an item from the room
-     *
-     * @param row the row location of the item
-     * @param col the col location of the item
-     */
+  /**
+   * Ads a projectile to the room.
+   *
+   * @param projectile the projectile to add to the room
+   */
+  void AddProjectile(Projectile* proj);
+
+  /**
+   * Removes an item from the room
+   *
+   * @param row the row location of the item
+   * @param col the col location of the item
+   */
   void RemoveItem(size_t row, size_t col);
+
+  /**
+   * Removes a projectile from the room
+   *
+   * @param index the projectile to remove
+   */
+  void RemoveProj(size_t index);
 
   /**
    * Gets the grid side size
@@ -120,6 +135,9 @@ class Room {
 
   //The enemies within this room
   std::vector<std::vector<Enemy*>> enemies_;
+
+  //The projectiles within the room
+  std::vector<Projectile*> projectiles_;
 
   //The width of this room in grid positions
   size_t width_;

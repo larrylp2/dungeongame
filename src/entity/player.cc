@@ -3,6 +3,7 @@
 //
 
 #include "entity/player.h"
+#include "entity/projectile.h"
 
 namespace finalproject {
 
@@ -55,6 +56,16 @@ size_t Player::GetRow() const {
 std::vector<Item*> Player::GetInventory() const {
   return inventory_;
 }
+
+void Player::FireProjectile(size_t direction) const {
+  size_t grid = 40;
+  size_t range = 200;
+  size_t strength = 20;
+  float speed = 5;
+  Projectile* proj = new Projectile(col_ * grid + grid / 2, row_ * grid + grid / 2, direction, range, strength, true, grid, speed);
+  current_room_->AddProjectile(proj);
+}
+
 
 
 } // namespace finalproject

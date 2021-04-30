@@ -32,6 +32,12 @@ void Enemy::DrawHealthBar(size_t row, size_t col, size_t grid_size) const {
   ci::gl::drawSolidRect(ci::Rectf(left_point, right_point));
 }
 
+double Enemy::TakeDamage(double damage) {
+  current_health_ -= damage;
+  return current_health_;
+}
+
+
 
 
 

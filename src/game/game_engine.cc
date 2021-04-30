@@ -101,6 +101,18 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
         player_.AddItem(current_item);
         std::cout << "Picked Up Item" << std::endl;
       }
+    } else if (event_code == ci::app::KeyEvent::KEY_UP) {
+      std::cout << "Attack" << std::endl;
+      player_.FireProjectile(0);
+    } else if (event_code == ci::app::KeyEvent::KEY_DOWN) {
+      std::cout << "Attack" << std::endl;
+      player_.FireProjectile(1);
+    } else if (event_code == ci::app::KeyEvent::KEY_RIGHT) {
+      std::cout << "Attack" << std::endl;
+      player_.FireProjectile(2);
+    } else if (event_code == ci::app::KeyEvent::KEY_LEFT) {
+      std::cout << "Attack" << std::endl;
+      player_.FireProjectile(3);
     }
   } else { //if the player is looking at their inventory
     if (event_code == ci::app::KeyEvent::KEY_e) {

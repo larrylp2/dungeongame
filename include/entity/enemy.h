@@ -31,6 +31,14 @@ class Enemy {
    */
   void DrawHealthBar(size_t row, size_t col, size_t grid_size) const;
 
+  /**
+   * Makes this enemy take damage, returning the amount of health it has left
+   *
+   * @param damage the amount of damage this enemy takes
+   * @return the new current health of this enemy
+   */
+  double TakeDamage(double damage);
+
  private:
   std::string name_ = "default";
 

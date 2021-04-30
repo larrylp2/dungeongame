@@ -68,6 +68,13 @@ class Player {
    */
   std::vector<Item*> GetInventory() const;
 
+  /**
+   * Fires a projectile.
+   *
+   * @param direction the direction to do the attack
+   */
+  void FireProjectile(size_t direction) const;
+
 
  private:
   // The current room of the player

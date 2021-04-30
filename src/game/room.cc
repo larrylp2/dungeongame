@@ -27,7 +27,7 @@ Room::Room(double height, double width, double margin, size_t order) {
   order_ = order;
 }
 
-void Room::Display() const {
+void Room::Display() {
   for (size_t row = 0; row < height_; row++) {
     for(size_t column = 0; column < width_; column++) {
       //Draws a grid from many empty rectangles
@@ -49,6 +49,17 @@ void Room::Display() const {
       }
     }
   }
+  for (size_t index = 0; index < projectiles_.size(); index++) {
+    Projectile* current_proj = projectiles_.at(index);
+    if (current_proj != nullptr) {
+      size_t remaining_range = current_proj->Display();
+      if (remaining_range <= 0) {
+        RemoveProj(index);
+        std::cout << "Delete" << std::endl;
+      }
+    }
+  }
+
 }
 
 void Room::AddItem(Item* item, size_t row, size_t col) {
@@ -58,6 +69,16 @@ void Room::AddItem(Item* item, size_t row, size_t col) {
 void Room::AddEnemy(Enemy* enemy, size_t row, size_t col) {
   enemies_.at(row).at(col) = enemy;
 }
+
+void Room::AddProjectile(Projectile* proj) {
+  projectiles_.push_back(proj);
+}
+
+void Room::RemoveProj(size_t index) {
+  delete projectiles_.at(index);
+  projectiles_.at(index) = nullptr;
+}
+
 
 void Room::RemoveItem(size_t row, size_t col) {
   items_.at(row).at(col) = nullptr;
