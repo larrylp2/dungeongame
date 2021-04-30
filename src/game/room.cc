@@ -49,6 +49,10 @@ void Room::AddItem(Item* item, size_t row, size_t col) {
   items_.at(row).at(col) = item;
 }
 
+void Room::RemoveItem(size_t row, size_t col) {
+  items_.at(row).at(col) = nullptr;
+}
+
 
 double Room::GetGridSize() const {
   return kGridSide;
@@ -65,6 +69,11 @@ void Room::DesignateObstacles(const std::vector<std::tuple<size_t, size_t>>& coo
 std::vector<std::vector<Obstacle*>> Room::GetObstacles() const {
   return obstacles_;
 }
+
+std::vector<std::vector<Item*>> Room::GetItems() const {
+  return items_;
+}
+
 
 size_t Room::GetOrder() const {
   return order_;

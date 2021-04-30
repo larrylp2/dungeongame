@@ -56,34 +56,83 @@ void GameEngine::draw() {
   ci::Color background_color("black");
   ci::gl::clear(background_color);
 
-  level_.Display(current_room_->GetOrder());
-  player_.Display();
+  if (!inventory_mode_) {
+    level_.Display(current_room_->GetOrder());
+    player_.Display();
+  } else {
+    DisplayInventory();
+  }
+
 }
 
 void GameEngine::keyDown(ci::app::KeyEvent event) {
   int event_code = event.getCode();
-  if (event_code == ci::app::KeyEvent::KEY_w) {
-    player_.UpdateLocation(-1, 0);
-  } else if (event_code == ci::app::KeyEvent::KEY_a) {
-    player_.UpdateLocation(0, -1);
-  } else if (event_code == ci::app::KeyEvent::KEY_s) {
-    player_.UpdateLocation(1, 0);
-  } else if (event_code == ci::app::KeyEvent::KEY_d) {
-    player_.UpdateLocation(0, 1);
-  } else if (event_code == ci::app::KeyEvent::KEY_SPACE) {
-    std::vector<Portal*> portals = level_.GetPortals().at(current_room_->GetOrder());
-    for (size_t index = 0; index < portals.size(); index++) {
-      Portal* current_portal = portals.at(index);
-      if (current_portal->GetRoom()->GetOrder() == current_room_->GetOrder()) {
-        if (player_.GetCol() == current_portal->GetCol() && player_.GetRow() == current_portal->GetRow()) {
-          std::cout << "Portal" << std::endl;
-          current_room_ = current_portal->Interact(&player_);
-          break;
+  if (!inventory_mode_) { //If the player is not looking at their inventory
+    if (event_code == ci::app::KeyEvent::KEY_w) {
+      player_.UpdateLocation(-1, 0);
+    } else if (event_code == ci::app::KeyEvent::KEY_a) {
+      player_.UpdateLocation(0, -1);
+    } else if (event_code == ci::app::KeyEvent::KEY_s) {
+      player_.UpdateLocation(1, 0);
+    } else if (event_code == ci::app::KeyEvent::KEY_d) {
+      player_.UpdateLocation(0, 1);
+    } else if (event_code == ci::app::KeyEvent::KEY_SPACE) { //Handles portal interaction
+      std::vector<Portal*> portals = level_.GetPortals().at(current_room_->GetOrder());
+      for (size_t index = 0; index < portals.size(); index++) {
+        Portal* current_portal = portals.at(index);
+        if (current_portal->GetRoom()->GetOrder() == current_room_->GetOrder()) {
+          if (player_.GetCol() == current_portal->GetCol() && player_.GetRow() == current_portal->GetRow()) {
+            std::cout << "Portal" << std::endl;
+            current_room_ = current_portal->Interact(&player_);
+            break;
+          }
         }
       }
+    } else if (event_code == ci::app::KeyEvent::KEY_e) { //Handles inventory
+      OpenInventory();
+      std::cout << "Open Inventory" << std::endl;
+    } else if (event_code == ci::app::KeyEvent::KEY_f) { //Handles item pickup
+      Item* current_item = current_room_->GetItems().at(player_.GetRow()).at(player_.GetCol());
+      if (current_item != nullptr) {
+        current_room_->RemoveItem(player_.GetRow(), player_.GetCol());
+        player_.AddItem(current_item);
+        std::cout << "Picked Up Item" << std::endl;
+      }
+    }
+  } else { //if the player is looking at their inventory
+    if (event_code == ci::app::KeyEvent::KEY_e) {
+      CloseInventory();
+      std::cout << "Close Inventory" << std::endl;
     }
   }
+
 }
+
+void GameEngine::OpenInventory() {
+  inventory_mode_ = true;
+}
+
+void GameEngine::CloseInventory() {
+  inventory_mode_ = false;
+}
+
+void GameEngine::DisplayInventory() const {
+  ci::gl::color(ci::Color("white"));
+  ci::gl::drawStrokedRect(ci::Rectf(
+          glm::vec2(kRoomMargin, kRoomMargin),
+          glm::vec2(kWindowWidth - kRoomMargin, kWindowHeight - kRoomMargin)));
+
+
+  std::vector<Item*> inventory_items = player_.GetInventory();
+  for (size_t index = 0; index < inventory_items.size(); index++) {
+    ci::gl::drawStrokedRect(ci::Rectf(
+            glm::vec2(kRoomMargin, kRoomMargin * (index + 1)),
+            glm::vec2(kWindowWidth - kRoomMargin,kRoomMargin + kRoomMargin * (index + 1))));
+    ci::gl::drawString(inventory_items.at(index)->GetName(), glm::vec2(kRoomMargin, kRoomMargin * (index + 1) + kRoomMargin / 2));
+  }
+}
+
+
 
 
 

@@ -38,6 +38,12 @@ void Player::UpdateRoom(Room* room) {
   current_room_ = room;
 }
 
+void Player::AddItem(Item* item) {
+  inventory_.push_back(item);
+  //Add mechanics to update player stats
+}
+
+
 size_t Player::GetCol() const {
   return col_;
 }
@@ -45,5 +51,10 @@ size_t Player::GetCol() const {
 size_t Player::GetRow() const {
   return row_;
 }
+
+std::vector<Item*> Player::GetInventory() const {
+  return inventory_;
+}
+
 
 } // namespace finalproject

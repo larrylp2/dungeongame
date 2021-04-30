@@ -24,6 +24,10 @@ void Item::Display(size_t row, size_t col, size_t grid_size) const {
   ci::gl::drawSolidRect(ci::Rectf(left_point_two, right_point_two));
 }
 
+std::string Item::GetName() const {
+  return item_name_;
+}
+
 
 
 

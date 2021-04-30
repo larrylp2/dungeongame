@@ -30,7 +30,17 @@ class Item {
    */
   void Display(size_t row, size_t col, size_t grid_size) const;
 
+  /**
+   * Returns the name of this item
+   *
+   * @return the string name of this item
+   */
+  std::string GetName() const;
+
  private:
+
+  std::string item_name_ = "default";
+
   //How much this item alters the health of the player
   double health_mod_;
 

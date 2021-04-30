@@ -41,6 +41,13 @@ class Player {
   void UpdateRoom(Room* room);
 
   /**
+   * Adds an item to the player's inventory, updating stats (need to implement)
+   *
+   * @param item the item the player gains
+   */
+  void AddItem(Item* item);
+
+  /**
    * Get player column.
    *
    * @return the player's column location
@@ -54,6 +61,14 @@ class Player {
    */
   size_t GetRow() const;
 
+  /**
+   * Gets the player's inventory
+   *
+   * @return the player's inventory
+   */
+  std::vector<Item*> GetInventory() const;
+
+
  private:
   // The current room of the player
   Room* current_room_;
@@ -65,7 +80,7 @@ class Player {
   size_t col_;
 
   // The inventory of the player
-  std::vector<Item> inventory_;
+  std::vector<Item*> inventory_;
 
 };
 

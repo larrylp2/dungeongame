@@ -43,7 +43,8 @@ class GameEngine : public ci::app::App {
   // Idea is to make this method call a separate level generator class that creates room randomly
   void GenerateLevels();
 
- private:
+private:
+
   //The current room displayed on the screen
   Room* current_room_;
 
@@ -55,6 +56,23 @@ class GameEngine : public ci::app::App {
 
   //The player
   Player player_;
+
+  bool inventory_mode_ = false;
+
+  /**
+   * Toggles the game to display the player's inventory.
+   */
+  void OpenInventory();
+
+  /**
+   * Toggles the game to no longer display the player's inventory.
+   */
+  void CloseInventory();
+
+  /**
+   * Displays the player inventory
+   */
+  void DisplayInventory() const;
 
 };
 

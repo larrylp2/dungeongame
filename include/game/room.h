@@ -48,11 +48,27 @@ class Room {
    */
   std::vector<std::vector<Obstacle*>> GetObstacles() const;
 
+  /**
+   * Gets the items within the room
+   */
+  std::vector<std::vector<Item*>> GetItems() const;
 
   /**
    * Adds an item to the room at a certain position
+   *
+   * @param item the item to add to the room
+   * @param row the row of the item
+   * @param col the column of the item
    */
   void AddItem(Item* item, size_t row, size_t col);
+
+  /**
+   * Removes an item from the room
+   *
+   * @param row the row location of the item
+   * @param col the col location of the item
+   */
+  void RemoveItem(size_t row, size_t col);
 
   /**
    * Gets the grid side size
