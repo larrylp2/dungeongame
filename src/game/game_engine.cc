@@ -46,7 +46,7 @@ void GameEngine::GenerateLevels() {
   Item* empty_item = new Item("Space Laser", 0, 10, 0, 50, 5, 0);
   room_one->AddItem(empty_item, 4, 9);
 
-  Enemy* default_enemy = new Enemy();
+  Enemy* default_enemy = new Enemy(50, 10, 150, 2, 200);
   room_one->AddEnemy(default_enemy, 9, 1);
 
   level_.AddRoom(current_room_);

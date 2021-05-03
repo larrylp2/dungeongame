@@ -23,6 +23,11 @@ size_t Projectile::Display(size_t room_width, size_t room_height) {
   if (row_ < 0 || col_ < 0 || row_ >= room_height || col_ >= room_width) { //Catches projectiles leaving the room
     return 0;
   } else {
+    if (player_proj_) {
+      ci::gl::color(ci::Color("white"));
+    } else {
+      ci::gl::color(ci::Color("red")); // enemy projectiles are red
+    }
     glm::vec2 center_point(x_, y_);
     ci::gl::drawSolidCircle(center_point, strength_ / 2);
     return range_;
@@ -56,8 +61,9 @@ double Projectile::GetStrength() const {
   return strength_;
 }
 
-
-
+bool Projectile::IsPlayer() const {
+  return player_proj_;
+}
 
 
 }

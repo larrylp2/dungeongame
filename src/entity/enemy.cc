@@ -6,9 +6,13 @@
 
 namespace finalproject {
 
-Enemy::Enemy() {
-   max_health_ = 100;
-   current_health_ = 100;
+Enemy::Enemy(size_t max_health, size_t attack, size_t range, size_t shot, size_t fire_freq) {
+   max_health_ = max_health;
+   current_health_ = max_health_;
+   attack_ = attack;
+   range_ = range;
+   shot_ = shot;
+   fire_frequency_ = fire_freq;
 }
 
 void Enemy::Display(size_t row, size_t col, size_t grid_size) const {
@@ -35,9 +39,14 @@ double Enemy::TakeDamage(double damage) {
   return current_health_;
 }
 
+Projectile* Enemy::FireProjectile(size_t row, size_t col, size_t direct, size_t grid) const {
+  Projectile* proj = new Projectile(row, col, direct, range_, attack_, false, grid, shot_);
+  return proj;
+}
 
-
-
+size_t Enemy::GetFireFrequency() const {
+  return fire_frequency_;
+}
 
 
 }

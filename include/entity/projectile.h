@@ -59,6 +59,11 @@ class Projectile {
    */
   double GetStrength() const;
 
+  /**
+   * Returns if this is a player generated projectile
+   */
+  bool IsPlayer() const;
+
  private:
   float x_;
 

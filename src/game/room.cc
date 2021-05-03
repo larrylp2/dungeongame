@@ -108,17 +108,20 @@ void Room::CheckProjectileCollisions() {
       size_t row = current_proj->GetRow();
       size_t col = current_proj->GetCol();
       double strength = current_proj->GetStrength();
-
-      Enemy* current_enemy = enemies_.at(row).at(col);
-      if (current_enemy != nullptr) {
-        double remaining_hp = current_enemy->TakeDamage(strength);
-        std::cout << "Hit!" << std::endl;
-        if (remaining_hp <= 0) {
-          std::cout << "Killed" << std::endl;
-          delete current_enemy;
-          enemies_.at(row).at(col) = nullptr;
+      if (current_proj->IsPlayer()) {
+        Enemy* current_enemy = enemies_.at(row).at(col);
+        if (current_enemy != nullptr) {
+          double remaining_hp = current_enemy->TakeDamage(strength);
+          std::cout << "Hit!" << std::endl;
+          if (remaining_hp <= 0) {
+            std::cout << "Killed" << std::endl;
+            delete current_enemy;
+            enemies_.at(row).at(col) = nullptr;
+          }
+          RemoveProj(index);
         }
-        RemoveProj(index);
+      } else {
+        //Add check if player is hit by projectile
       }
       Obstacle* current_obstacle = obstacles_.at(row).at(col);
       if (current_obstacle != nullptr) {
@@ -192,8 +195,11 @@ void Room::ExecuteEnemyActions() {
     for (size_t col = 0; col < enemies_.at(0).size(); col++) {
       Enemy* current_enemy = enemies_.at(row).at(col);
       if (current_enemy != nullptr) { //If this enemy exists, generate random number to determine its direction of movement
+
         //Generate random number from 0 to 250, only moving when that number falls between 0 to 4
         int number = rand() % 250;
+
+        //Handles Movement
         bool move_successful = true;
         if (number <= 1) { //Move north
           move_successful = AddEnemyTo2DVector(current_enemy, new_enemy_loc, row - 1, col);
@@ -208,6 +214,20 @@ void Room::ExecuteEnemyActions() {
         }
         if (!move_successful) { //Maintains the enemy's current position if it tried to be moved out of bounds
           AddEnemyTo2DVector(current_enemy, new_enemy_loc, row, col);
+        }
+
+        //Handles Projectiles
+        size_t fire_freq = current_enemy->GetFireFrequency();
+        //Generate random number from 0 to firing frequency, only firing a projectile when number is between 0 and 4
+        number = rand() % fire_freq;
+        if (number <= 1) { //Fires north
+          AddProjectile(current_enemy->FireProjectile(row, col, 0, kGridSide));
+        } else if (number <= 2) { //Fires south
+          AddProjectile(current_enemy->FireProjectile(row, col, 1, kGridSide));
+        } else if (number <= 3) { //Fires east
+          AddProjectile(current_enemy->FireProjectile(row, col, 2, kGridSide));
+        } else if (number <= 4) { //Fires west
+          AddProjectile(current_enemy->FireProjectile(row, col, 3, kGridSide));
         }
       }
     }
