@@ -13,8 +13,6 @@ class Projectile {
   /**
    * Constructs a projectile
    *
-   * @param x the starting x location of the projectile
-   * @param y the starting y location of the projectile
    * @param row the row of the projectile
    * @param col the col of the projectile
    * @param direction the direction the projectile is travelling
@@ -24,7 +22,7 @@ class Projectile {
    * @param grid the size of grids
    * @param speed the speed of projectiles
    */
-  Projectile(float x, float y, size_t row, size_t col, size_t direction, float range, double strength, bool player_proj, size_t grid, float speed);
+  Projectile(size_t row, size_t col, size_t direction, float range, double strength, bool player_proj, size_t grid, float speed);
 
   /**
    * Displays the projectile, updating and returning the remaining range it can travel

@@ -70,7 +70,7 @@ std::vector<Item*> Player::GetInventory() const {
 
 void Player::FireProjectile(size_t direction) const {
   size_t grid = 40;
-  Projectile* proj = new Projectile(col_ * grid + grid / 2, row_ * grid + grid / 2, row_, col_, direction, range_, attack_, true, grid, shot_);
+  Projectile* proj = new Projectile(row_, col_, direction, range_, attack_, true, grid, shot_);
   current_room_->AddProjectile(proj);
 }
 

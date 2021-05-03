@@ -5,9 +5,9 @@
 
 namespace finalproject {
 
-Projectile::Projectile(float x, float y, size_t row, size_t col, size_t direction, float range, double strength, bool player_proj, size_t grid, float speed) {
-  x_ = x;
-  y_ = y;
+Projectile::Projectile(size_t row, size_t col, size_t direction, float range, double strength, bool player_proj, size_t grid, float speed) {
+  x_ = col * grid + grid / 2;
+  y_ = row * grid + grid / 2;
   row_ = row;
   col_ = col;
   direction_ = direction;
