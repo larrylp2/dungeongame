@@ -10,6 +10,8 @@
 #include "game/item.h"
 #include "entity/enemy.h"
 #include "entity/projectile.h"
+#include <time.h>
+#include <random>
 
 namespace finalproject {
 
@@ -61,12 +63,29 @@ class Room {
   std::vector<std::vector<Enemy*>> GetEnemies() const;
 
   /**
-   * Adds an item to the room at a certain position
-   *
-   * @param item the item to add to the room
-   * @param row the row of the item
-   * @param col the column of the item
+   * Exectues the movements and attacks of enemies within the room
    */
+  void ExecuteEnemyActions();
+
+  /**
+   * Helper method that adds an enemy to an existing 2d vector of enemies.
+   * Resolving potential conflicts if two enemies want to move to the save square.
+   *
+   * @param enemy the enemy to add
+   * @param enemy_loc the 2D vector of other enemies locations
+   * @param row the row
+   * @param col the col
+   * @return a boolean if the enemy's move coordinates were within the grid
+   */
+  bool AddEnemyTo2DVector(Enemy* enemy, std::vector<std::vector<Enemy*>>& enemy_loc, size_t row, size_t col);
+
+    /**
+     * Adds an item to the room at a certain position
+     *
+     * @param item the item to add to the room
+     * @param row the row of the item
+     * @param col the column of the item
+     */
   void AddItem(Item* item, size_t row, size_t col);
 
   /**

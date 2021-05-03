@@ -14,6 +14,9 @@ Room::Room() {
   items_ = std::vector<std::vector<Item*>>(height_, std::vector<Item*>(width_));
   enemies_ = std::vector<std::vector<Enemy*>>(height_, std::vector<Enemy*>(width_));
   order_ = 0;
+
+  //create random seed
+  std::srand(std::time(nullptr));
 }
 
 
@@ -25,9 +28,13 @@ Room::Room(double height, double width, double margin, size_t order) {
   items_ = std::vector<std::vector<Item*>>(height_, std::vector<Item*>(width_));
   enemies_ = std::vector<std::vector<Enemy*>>(height_, std::vector<Enemy*>(width_));
   order_ = order;
+
+  //create random seed
+  std::srand(std::time(nullptr));
 }
 
 void Room::Display() {
+  ExecuteEnemyActions();
   for (size_t row = 0; row < height_; row++) {
     for(size_t column = 0; column < width_; column++) {
       //Draws a grid from many empty rectangles
@@ -151,6 +158,61 @@ std::vector<std::vector<Item*>> Room::GetItems() const {
 
 std::vector<std::vector<Enemy*>> Room::GetEnemies() const {
   return enemies_;
+}
+
+bool Room::AddEnemyTo2DVector(Enemy* enemy, std::vector<std::vector<Enemy*>>& enemy_loc, size_t row, size_t col) {
+  if (row >= 0 && col >= 0 && row < height_ && col < width_) {
+    if (enemy_loc.at(row).at(col) == nullptr) {
+      enemy_loc.at(row).at(col) = enemy;
+    } else {
+      std::cout << "Enemy Collision" << std::endl;
+      if (row + 1 < height_) {
+        return AddEnemyTo2DVector(enemy, enemy_loc, row + 1, col);
+      } else if (col + 1 < width_) {
+        return AddEnemyTo2DVector(enemy, enemy_loc, row, col + 1);
+      } else if (row - 1 >= 0) {
+        return AddEnemyTo2DVector(enemy, enemy_loc, row - 1, col);
+      } else if (col - 1 >= 0) {
+        return AddEnemyTo2DVector(enemy, enemy_loc, row, col - 1);
+      } else {
+        std::cout << "Enemy has no valid square to occupy" << std::endl;
+        delete enemy;
+      }
+    }
+    return true;
+  } else {
+    return false;
+  }
+}
+
+void Room::ExecuteEnemyActions() {
+  //Create empty 2d vector with enemy locations
+  std::vector<std::vector<Enemy*>> new_enemy_loc = std::vector<std::vector<Enemy*>>(height_, std::vector<Enemy*>(width_));
+  for (size_t row = 0; row < enemies_.size(); row++) {
+    for (size_t col = 0; col < enemies_.at(0).size(); col++) {
+      Enemy* current_enemy = enemies_.at(row).at(col);
+      if (current_enemy != nullptr) { //If this enemy exists, generate random number to determine its direction of movement
+        //Generate random number from 0 to 250, only moving when that number falls between 0 to 4
+        int number = rand() % 250;
+        bool move_successful = true;
+        if (number <= 1) { //Move north
+          move_successful = AddEnemyTo2DVector(current_enemy, new_enemy_loc, row - 1, col);
+        } else if (number <= 2 ) { //Move south
+          move_successful = AddEnemyTo2DVector(current_enemy, new_enemy_loc, row + 1, col);
+        } else if (number <= 3) { //Move east
+          move_successful = AddEnemyTo2DVector(current_enemy, new_enemy_loc, row, col + 1);
+        } else if (number <= 4) { //Move west
+          move_successful = AddEnemyTo2DVector(current_enemy, new_enemy_loc, row, col - 1);
+        } else {
+          move_successful = AddEnemyTo2DVector(current_enemy, new_enemy_loc, row, col);
+        }
+        if (!move_successful) { //Maintains the enemy's current position if it tried to be moved out of bounds
+          AddEnemyTo2DVector(current_enemy, new_enemy_loc, row, col);
+        }
+      }
+    }
+  }
+  enemies_ = new_enemy_loc;
 }
 
 size_t Room::GetOrder() const {

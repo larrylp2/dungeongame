@@ -9,8 +9,6 @@ namespace finalproject {
 Enemy::Enemy() {
    max_health_ = 100;
    current_health_ = 100;
-   std::cout << current_health_ << std::endl;
-   std::cout << max_health_ << std::endl;
 }
 
 void Enemy::Display(size_t row, size_t col, size_t grid_size) const {
