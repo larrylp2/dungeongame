@@ -22,23 +22,26 @@ namespace finalproject {
 class Room {
  public:
   /**
-   * Default constructor for a room
-   */
-  Room();
-
-  /**
    * Constructor for a room of a certain size
+   *
    * @param height the height of the room
    * @param width the width of the room
    * @param margin the margin between room edges and the window edges
    * @param order the order of the room within a level
+   * @param window_height the height of the window
+   * @param window_width the width of the window
    */
-  Room(double height, double width, double margin, size_t order);
+  Room(double height, double width, double margin, size_t order, double window_height, double window_width);
 
   /**
    * Displays the room within the game
    */
   void Display();
+
+  /**
+   * Displays the player's health bar
+   */
+  void DisplayHealth() const;
 
   /**
    * Adds an obstacle to this room
@@ -139,6 +142,22 @@ class Room {
    */
   size_t GetOrder() const;
 
+  /**
+   * Updates the player's saved location
+   *
+   * @param row the player's row
+   * @param col the player's col
+   */
+  void UpdatePlayerLocation(size_t row, size_t col);
+
+  /**
+   * Updates the player's health within the room
+   *
+   * @param max the player's maximum health
+   * @param current the player's current health
+   */
+  void UpdatePlayerHealth(size_t max, size_t current);
+
 
   /**
    * Gets the height of this room
@@ -154,6 +173,21 @@ class Room {
    * @return the width
    */
   size_t GetWidth() const;
+
+
+  /**
+   * Gets the player's max hp
+   *
+   * @return maximum health
+   */
+  size_t GetMax() const;
+
+  /**
+   * Gets the player's current hp
+   *
+   * @return current health
+   */
+  size_t GetCurrent() const;
 
  private:
   //The obstacles within this room
@@ -182,6 +216,24 @@ class Room {
 
   //The order this room is within the level
   size_t order_;
+
+  //Keeps track of the player's row within the room (for projectiles)
+  size_t player_row_ = 0;
+
+  //Keeps track of the player's col within the room (for projectiles)
+  size_t player_col_ = 0;
+
+  //Keeps track of the player's maximum health within the room (for projectiles)
+  size_t player_max_hp_;
+
+  //Keeps track of the player's current health within the room (for projectiles
+  size_t player_curr_hp_;
+
+  //The height of the game window
+  double window_height_;
+
+  //The width of the game window
+  double window_width_;
 };
 
 

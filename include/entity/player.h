@@ -23,7 +23,7 @@ class Player {
   /**
    * Displays a player.
    */
-  void Display() const;
+  void Display();
 
   /**
    * Updates the player's location.
@@ -75,6 +75,14 @@ class Player {
    */
   void FireProjectile(size_t direction) const;
 
+  /**
+   * Makes this player take damage, returning the amount of health it has left
+   *
+   * @param damage the amount of damage this enemy takes
+   * @return the new current health of this enemy
+   */
+  double TakeDamage(double damage);
+
 
  private:
   // The current room of the player
@@ -89,7 +97,9 @@ class Player {
   // The inventory of the player
   std::vector<Item*> inventory_;
 
-  size_t health_;
+  size_t max_health_;
+
+  size_t current_health_;
 
   size_t attack_;
 

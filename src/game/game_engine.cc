@@ -14,7 +14,7 @@ GameEngine::GameEngine() {
 }
 
 void GameEngine::GenerateLevels() {
-  Room* room_one = new Room(10, 10, kRoomMargin, 0); //ten by ten grid
+  Room* room_one = new Room(10, 10, kRoomMargin, 0, kWindowHeight, kWindowWidth); //ten by ten grid
   current_room_ = room_one;
   player_ = Player();
   player_.UpdateRoom(current_room_);
@@ -35,7 +35,7 @@ void GameEngine::GenerateLevels() {
   current_room_->DesignateObstacles(terrain);
 
   //Need to add constructors, destructors, etc
-  Room* room_two = new Room(2, 8, kRoomMargin, 1);
+  Room* room_two = new Room(2, 8, kRoomMargin, 1, kWindowHeight, kWindowWidth);
   Portal* portal_three = new Portal(9, 9, *current_room_);
   Portal* portal_four = new Portal(0, 1, *room_two);
   portal_three->LinkPortal(*portal_four);

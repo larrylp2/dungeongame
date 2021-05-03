@@ -10,7 +10,8 @@ namespace finalproject {
 Player::Player() {
   row_ = 0;
   col_ = 0;
-  health_ = 100;
+  max_health_ = 100;
+  current_health_ = max_health_;
   attack_ = 20;
   defense_ = 0;
   range_ = 200;
@@ -18,7 +19,7 @@ Player::Player() {
   vitality_ = 1;
 }
 
-void Player::Display() const {
+void Player::Display() {
   //Temporarily an orange triangle to represent the player
   ci::gl::color(ci::Color("orange"));
   size_t grid = 40;
@@ -26,6 +27,9 @@ void Player::Display() const {
   glm::vec2 left_point(col_ * grid + 5, row_ * grid + grid - 5);
   glm::vec2 right_point(col_ * grid + grid - 5, row_ * grid + grid - 5);
   ci::gl::drawSolidTriangle(top_point, left_point, right_point);
+
+  max_health_ = current_room_->GetMax();
+  current_health_ = current_room_->GetCurrent();
 }
 
 void Player::UpdateLocation(size_t row, size_t col) {
@@ -39,15 +43,18 @@ void Player::UpdateLocation(size_t row, size_t col) {
     row_ = new_row;
     col_ = new_col;
   }
+  current_room_->UpdatePlayerLocation(row_, col_);
 }
 
 void Player::UpdateRoom(Room* room) {
   current_room_ = room;
+  current_room_->UpdatePlayerLocation(row_, col_);
+  current_room_->UpdatePlayerHealth(max_health_, current_health_);
 }
 
 void Player::AddItem(Item* item) {
   inventory_.push_back(item);
-  health_ += item->GetHealth();
+  max_health_ += item->GetHealth();
   attack_ += item->GetAttack();
   defense_ += item->GetDefense();
   range_ += item->GetRange();

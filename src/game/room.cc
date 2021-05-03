@@ -6,21 +6,7 @@
 
 namespace finalproject {
 
-Room::Room() {
-  width_ = 0;
-  height_ = 0;
-  margin_ = 0;
-  obstacles_ = std::vector<std::vector<Obstacle*>>(height_, std::vector<Obstacle*>(width_));
-  items_ = std::vector<std::vector<Item*>>(height_, std::vector<Item*>(width_));
-  enemies_ = std::vector<std::vector<Enemy*>>(height_, std::vector<Enemy*>(width_));
-  order_ = 0;
-
-  //create random seed
-  std::srand(std::time(nullptr));
-}
-
-
-Room::Room(double height, double width, double margin, size_t order) {
+Room::Room(double height, double width, double margin, size_t order, double window_height, double window_width) {
   height_ = height;
   width_ = width;
   margin_ = margin;
@@ -28,6 +14,9 @@ Room::Room(double height, double width, double margin, size_t order) {
   items_ = std::vector<std::vector<Item*>>(height_, std::vector<Item*>(width_));
   enemies_ = std::vector<std::vector<Enemy*>>(height_, std::vector<Enemy*>(width_));
   order_ = order;
+
+  window_height_ = window_height;
+  window_width_ = window_width;
 
   //create random seed
   std::srand(std::time(nullptr));
@@ -67,8 +56,24 @@ void Room::Display() {
     }
   }
   CleanProjectiles();
-
+  DisplayHealth();
 }
+
+void Room::DisplayHealth() const {
+  double health_ratio = (1.0 * player_curr_hp_) / player_max_hp_;
+  if (health_ratio > .7) { //Color of health bar changes as health drops
+    ci::gl::color(ci::Color("green"));
+  } else if (health_ratio > .3) {
+    ci::gl::color(ci::Color("yellow"));
+  } else {
+    ci::gl::color(ci::Color("red"));
+  }
+
+  ci::gl::drawSolidRect(ci::Rectf(
+          glm::vec2(kGridSide,  window_height_ - 2 * kGridSide),
+          glm::vec2(health_ratio * (window_width_ - 2 * kGridSide) + kGridSide,  window_height_ - kGridSide)));
+}
+
 
 void Room::AddItem(Item* item, size_t row, size_t col) {
   items_.at(row).at(col) = item;
@@ -112,7 +117,7 @@ void Room::CheckProjectileCollisions() {
         Enemy* current_enemy = enemies_.at(row).at(col);
         if (current_enemy != nullptr) {
           double remaining_hp = current_enemy->TakeDamage(strength);
-          std::cout << "Hit!" << std::endl;
+          std::cout << "Hit Enemy!" << std::endl;
           if (remaining_hp <= 0) {
             std::cout << "Killed" << std::endl;
             delete current_enemy;
@@ -121,11 +126,15 @@ void Room::CheckProjectileCollisions() {
           RemoveProj(index);
         }
       } else {
-        //Add check if player is hit by projectile
+        if (row == player_row_ && col == player_col_) {
+          std::cout << "Player Hit!" << std::endl;
+          player_curr_hp_ -= strength;
+          RemoveProj(index);
+        }
       }
       Obstacle* current_obstacle = obstacles_.at(row).at(col);
       if (current_obstacle != nullptr) {
-        std::cout << "Blocked" << std::endl;
+        std::cout << "Obstacle Hit!" << std::endl;
         RemoveProj(index);
       }
     }
@@ -239,12 +248,31 @@ size_t Room::GetOrder() const {
   return order_;
 }
 
+void Room::UpdatePlayerLocation(size_t row, size_t col) {
+  player_row_ = row;
+  player_col_ = col;
+}
+
+void Room::UpdatePlayerHealth(size_t max, size_t current) {
+  player_max_hp_ = max;
+  player_curr_hp_ = current;
+}
+
+
 size_t Room::GetHeight() const {
   return height_;
 }
 
 size_t Room::GetWidth() const {
   return width_;
+}
+
+size_t Room::GetMax() const {
+  return player_max_hp_;
+}
+
+size_t Room::GetCurrent() const {
+  return player_curr_hp_;
 }
 
 
