@@ -23,6 +23,11 @@ std::vector<std::vector<Portal*>> Level::GetPortals() const {
   return portals_;
 }
 
+std::vector<Room*> Level::GetRooms() const {
+  return rooms_;
+}
+
+
 void Level::AddRoom(Room* room) {
   rooms_.at(room->GetOrder()) = room;
   room_num_++;
@@ -31,7 +36,7 @@ void Level::AddRoom(Room* room) {
 void Level::Display(size_t room_order) const {
   rooms_.at(room_order)->Display();
   for (size_t index = 0; index < portals_.at(room_order).size(); index++) {
-    portals_.at(room_order).at(index)->Display(rooms_.at(room_order)->GetGridSize());
+    portals_.at(room_order).at(index)->Display( rooms_.at(room_order)->GetGridSize());
   }
 }
 

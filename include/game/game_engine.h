@@ -12,6 +12,8 @@
 #include "game/level.h"
 #include "entity/player.h"
 #include "entity/portal.h"
+#include "game/level_generator.h"
+#include "entity/gate.h"
 
 // Need to decide on a name for the game
 namespace finalproject {
@@ -30,6 +32,8 @@ class GameEngine : public ci::app::App {
   void draw() override;
   void keyDown(ci::app::KeyEvent event) override;
 
+  void InteractGate(Gate* gate);
+
   //Width of the game window
   double kWindowWidth = 800;
 
@@ -41,21 +45,20 @@ class GameEngine : public ci::app::App {
 
   // Generates levels for the game
   // Idea is to make this method call a separate level generator class that creates room randomly
-  void GenerateLevels();
+  // void GenerateLevels();
 
 private:
+
+  LevelGenerator level_gen_ = LevelGenerator(kWindowWidth, kWindowHeight, kRoomMargin);
 
   //The current room displayed on the screen
   Room* current_room_;
 
-  //All of the levels within the game (need to improve level class before adding)
-  std::vector<Level> levels_;
-
-  //The current level
-  Level level_ = Level(2);
+  //Current Level within the game
+  Level* current_level_;
 
   //The player
-  Player player_;
+  Player player_ = Player();
 
   bool inventory_mode_ = false;
 

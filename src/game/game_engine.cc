@@ -10,9 +10,15 @@ namespace finalproject {
 
 GameEngine::GameEngine() {
   ci::app::setWindowSize(kWindowWidth, kWindowHeight);
-  GenerateLevels();
+  current_level_ = level_gen_.GenerateLevel();
+  std::cout << "Level Generated" << std::endl;
+  current_room_ = current_level_->GetRooms().at(0);
+  std::cout << "Current Room Located" << std::endl;
+  player_.UpdateRoom(current_room_);
+  std::cout << "Player Created" << std::endl;
+  //GenerateLevels();
 }
-
+/*
 void GameEngine::GenerateLevels() {
   Room* room_one = new Room(10, 10, kRoomMargin, 0, kWindowHeight, kWindowWidth); //ten by ten grid
   current_room_ = room_one;
@@ -53,6 +59,7 @@ void GameEngine::GenerateLevels() {
   level_.AddRoom(room_two);
   //Later replace with class that helps with random level generation
 }
+ */
 
 
 void GameEngine::draw() {
@@ -60,7 +67,7 @@ void GameEngine::draw() {
   ci::gl::clear(background_color);
 
   if (!inventory_mode_) {
-    level_.Display(current_room_->GetOrder());
+    current_level_->Display(current_room_->GetOrder());
     player_.Display();
   } else {
     DisplayInventory();
@@ -80,7 +87,7 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
     } else if (event_code == ci::app::KeyEvent::KEY_d) {
       player_.UpdateLocation(0, 1);
     } else if (event_code == ci::app::KeyEvent::KEY_SPACE) { //Handles portal interaction
-      std::vector<Portal*> portals = level_.GetPortals().at(current_room_->GetOrder());
+      std::vector<Portal*> portals = current_level_->GetPortals().at(current_room_->GetOrder());
       for (size_t index = 0; index < portals.size(); index++) {
         Portal* current_portal = portals.at(index);
         if (current_portal->GetRoom()->GetOrder() == current_room_->GetOrder()) {
@@ -122,6 +129,12 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
   }
 
 }
+
+void GameEngine::InteractGate(Gate* gate) {
+
+}
+
+
 
 void GameEngine::OpenInventory() {
   inventory_mode_ = true;

@@ -64,6 +64,7 @@ list(APPEND SOURCE_FILES    ${ENTITY_SOURCE_FILES}
                             src/game/game_engine.cc
                             src/game/item.cc
                             src/game/level.cc
+                            src/game/level_generator.cc
                             src/game/room.cc)
 
 # Need to add more test files

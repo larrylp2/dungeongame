@@ -6,7 +6,7 @@
 
 namespace finalproject {
 
-Gate::Gate() {
+Gate::Gate(Level* current_level, size_t order, size_t row, size_t col) {
 
 }
 

@@ -24,15 +24,6 @@ public:
    */
   void Display() const;
 
-  /**
-   * Interacts with the player
-   *
-   * @param player the player interacting with this gate
-   * @return the new level this player is in
-   */
-  Level* Interact(Player* player);
-
-
 private:
   // The current level this gate is in
   Level* current_level_;

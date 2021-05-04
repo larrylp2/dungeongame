@@ -15,11 +15,12 @@ namespace finalproject {
 class Level {
 
  public:
-
   /**
-   * Default constructor.
+   * Constructor for a level.
+   *
+   * @param room_cap the max number of rooms
    */
-  Level();
+  Level(size_t room_cap);
 
   /**
    * Displays important objects within a room of the level
@@ -27,13 +28,6 @@ class Level {
    * @param room_order the index of the room to display information about
    */
   void Display(size_t room_order) const;
-
-  /**
-   * Constructor for a level.
-   *
-   * @param room_cap the max number of rooms
-   */
-  Level(size_t room_cap);
 
   /**
    * Adds a room to a level
@@ -52,9 +46,16 @@ class Level {
   /**
    * Gets the portals within the level
    *
-   * @return the portals within th level
+   * @return the portals within the level
    */
   std::vector<std::vector<Portal*>> GetPortals() const;
+
+  /**
+   * Gets the rooms within the level
+   *
+   * @return the rooms within the level
+   */
+  std::vector<Room*> GetRooms() const;
 
  private:
   //The maximum number of rooms within this floor

@@ -199,12 +199,11 @@ bool Room::AddEnemyTo2DVector(Enemy* enemy, std::vector<std::vector<Enemy*>>& en
 
 void Room::ExecuteEnemyActions() {
   //Create empty 2d vector with enemy locations
-  std::vector<std::vector<Enemy*>> new_enemy_loc = std::vector<std::vector<Enemy*>>(height_, std::vector<Enemy*>(width_));
+  std::vector<std::vector<Enemy*>> new_enemy_loc(height_, std::vector<Enemy*>(width_));
   for (size_t row = 0; row < enemies_.size(); row++) {
     for (size_t col = 0; col < enemies_.at(0).size(); col++) {
       Enemy* current_enemy = enemies_.at(row).at(col);
       if (current_enemy != nullptr) { //If this enemy exists, generate random number to determine its direction of movement
-
         //Generate random number from 0 to 250, only moving when that number falls between 0 to 4
         int number = rand() % 250;
 
