@@ -46,9 +46,10 @@ class Room {
   /**
    * Adds an obstacle to this room
    *
-   * @param obstacle to add
+   * @param row the row of the obstacle
+   * @param col the column fo the obstacle
    */
-  void DesignateObstacles(const std::vector<std::tuple<size_t, size_t>>& coordinates);
+  void DesignateObstacle(size_t row, size_t col);
 
   /**
    * Gets the obstacles within the room
@@ -189,6 +190,22 @@ class Room {
    */
   size_t GetCurrent() const;
 
+  /**
+   * Marks a location occupied within the room
+   *
+   * @param row the row to be occupied
+   * @param col the col to be occupied
+   */
+  void MarkOccupied(size_t row, size_t col);
+
+  /**
+   * Marks a location unoccupied within the room
+   *
+   * @param row the row to be vacant
+   * @param col the col to be vacant
+   */
+  void MarkVacant(size_t row, size_t col);
+
  private:
   //The obstacles within this room
   std::vector<std::vector<Obstacle*>> obstacles_;
@@ -201,6 +218,9 @@ class Room {
 
   //The projectiles within the room
   std::vector<Projectile*> projectiles_;
+
+  //The occupied squares in the room, used to prevent assignment of multiple entities to same location
+  std::vector<std::vector<bool>> occupied_;
 
   //The width of this room in grid positions
   size_t width_;

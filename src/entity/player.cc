@@ -10,7 +10,7 @@ namespace finalproject {
 Player::Player() {
   row_ = 0;
   col_ = 0;
-  max_health_ = 100;
+  max_health_ = 200;
   current_health_ = max_health_;
   attack_ = 20;
   defense_ = 0;

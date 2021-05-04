@@ -9,6 +9,7 @@ Portal::Portal(size_t row, size_t col, Room &room, bool another) {
   row_ = row;
   col_ = col;
   current_room_ = &room;
+  current_room_->MarkOccupied(row, col);
   another_ = another;
 }
 

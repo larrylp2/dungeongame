@@ -13,6 +13,7 @@ Room::Room(double height, double width, double margin, size_t order, double wind
   obstacles_ = std::vector<std::vector<Obstacle*>>(height_, std::vector<Obstacle*>(width_));
   items_ = std::vector<std::vector<Item*>>(height_, std::vector<Item*>(width_));
   enemies_ = std::vector<std::vector<Enemy*>>(height_, std::vector<Enemy*>(width_));
+  occupied_ = std::vector<std::vector<bool>>(height_, std::vector<bool>(width_, false));
   order_ = order;
 
   window_height_ = window_height;
@@ -77,10 +78,12 @@ void Room::DisplayHealth() const {
 
 void Room::AddItem(Item* item, size_t row, size_t col) {
   items_.at(row).at(col) = item;
+  MarkOccupied(row, col);
 }
 
 void Room::AddEnemy(Enemy* enemy, size_t row, size_t col) {
   enemies_.at(row).at(col) = enemy;
+  MarkOccupied(row, col);
 }
 
 void Room::AddProjectile(Projectile* proj) {
@@ -145,6 +148,7 @@ void Room::CheckProjectileCollisions() {
 
 void Room::RemoveItem(size_t row, size_t col) {
   items_.at(row).at(col) = nullptr;
+  MarkVacant(row, col);
 }
 
 
@@ -152,11 +156,10 @@ double Room::GetGridSize() const {
   return kGridSide;
 }
 
-void Room::DesignateObstacles(const std::vector<std::tuple<size_t, size_t>>& coordinates) {
+void Room::DesignateObstacle(size_t row, size_t col) {
   Obstacle obstacle = Obstacle();
-  for (size_t index = 0; index < coordinates.size(); index++) {
-    std::tuple<size_t, size_t> pair = coordinates.at(index);
-    obstacles_.at(std::get<0>(pair)).at(std::get<1>(pair)) = &obstacle;
+  if (!occupied_.at(row).at(col)) {
+    obstacles_.at(row).at(col) = &obstacle;
   }
 }
 
@@ -174,10 +177,11 @@ std::vector<std::vector<Enemy*>> Room::GetEnemies() const {
 
 bool Room::AddEnemyTo2DVector(Enemy* enemy, std::vector<std::vector<Enemy*>>& enemy_loc, size_t row, size_t col) {
   if (row >= 0 && col >= 0 && row < height_ && col < width_) {
-    if (enemy_loc.at(row).at(col) == nullptr) {
+    if (enemy_loc.at(row).at(col) == nullptr && obstacles_.at(row).at(col) == nullptr) {
       enemy_loc.at(row).at(col) = enemy;
+      MarkOccupied(row, col);
     } else {
-      std::cout << "Enemy Collision" << std::endl;
+      std::cout << "Enemy Collision" << std::endl; //Collision with obstacle or enemy
       if (row + 1 < height_) {
         return AddEnemyTo2DVector(enemy, enemy_loc, row + 1, col);
       } else if (col + 1 < width_) {
@@ -203,6 +207,7 @@ void Room::ExecuteEnemyActions() {
   for (size_t row = 0; row < enemies_.size(); row++) {
     for (size_t col = 0; col < enemies_.at(0).size(); col++) {
       Enemy* current_enemy = enemies_.at(row).at(col);
+      MarkVacant(row, col);
       if (current_enemy != nullptr) { //If this enemy exists, generate random number to determine its direction of movement
         //Generate random number from 0 to 250, only moving when that number falls between 0 to 4
         int number = rand() % 250;
@@ -273,6 +278,16 @@ size_t Room::GetMax() const {
 size_t Room::GetCurrent() const {
   return player_curr_hp_;
 }
+
+void Room::MarkOccupied(size_t row, size_t col) {
+  occupied_.at(row).at(col) = true;
+}
+
+void Room::MarkVacant(size_t row, size_t col) {
+  occupied_.at(row).at(col) = false;
+}
+
+
 
 
 } // namespace finalproject
