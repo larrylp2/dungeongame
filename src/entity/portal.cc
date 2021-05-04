@@ -5,15 +5,11 @@
 
 namespace finalproject {
 
-Portal::Portal() {
-  row_ = 0;
-  col_ = 0;
-}
-
-Portal::Portal(size_t row, size_t col, Room &room) {
+Portal::Portal(size_t row, size_t col, Room &room, bool another) {
   row_ = row;
   col_ = col;
   current_room_ = &room;
+  another_ = another;
 }
 
 void Portal::LinkPortal(Portal &destination) {
@@ -21,8 +17,12 @@ void Portal::LinkPortal(Portal &destination) {
 }
 
 void Portal::Display(size_t grid_size) const {
-  //Temporarily an purple rectangle to represent the portal
-  ci::gl::color(ci::Color("purple"));
+  //Portals that stay within a room are purple, while those that lead outside are green
+  if (!another_) {
+    ci::gl::color(ci::Color("purple"));
+  } else {
+    ci::gl::color(ci::Color("green"));
+  }
   glm::vec2 left_point(col_ * grid_size + 5, row_ * grid_size + 5);
   glm::vec2 right_point(col_ * grid_size + grid_size - 5,
                         row_ * grid_size + grid_size - 5);

@@ -15,15 +15,15 @@ namespace finalproject {
  */
 class Portal {
  public:
-  Portal();
   /**
-   * Default constructor for a portal
+   * Constructor for a portal.
    *
    * @param row the row of this portal
    * @param col the column of this portal
    * @param room the room this portal is in
+   * @param another if this portal leads to another oom
    */
-  Portal(size_t row, size_t col, Room& room);
+  Portal(size_t row, size_t col, Room& room, bool another);
 
   /**
    * Links this portal to another portal.
@@ -74,6 +74,9 @@ class Portal {
 
   //The current room that this portal is in
   Room* current_room_;
+
+  //If this portal leads to another room, or remains in the same room
+  bool another_;
 
   size_t col_;
 

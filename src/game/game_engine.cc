@@ -20,8 +20,8 @@ void GameEngine::GenerateLevels() {
   player_.UpdateRoom(current_room_);
 
   //Adds two portals to the current room
-  Portal portal_one(3, 3, *current_room_);
-  Portal portal_two(7, 7, *current_room_);
+  Portal portal_one(3, 3, *current_room_, false);
+  Portal portal_two(7, 7, *current_room_, false);
   portal_one.LinkPortal(portal_two);
   portal_two.LinkPortal(portal_one);
 
@@ -36,8 +36,8 @@ void GameEngine::GenerateLevels() {
 
   //Need to add constructors, destructors, etc
   Room* room_two = new Room(2, 8, kRoomMargin, 1, kWindowHeight, kWindowWidth);
-  Portal* portal_three = new Portal(9, 9, *current_room_);
-  Portal* portal_four = new Portal(0, 1, *room_two);
+  Portal* portal_three = new Portal(9, 9, *current_room_, true);
+  Portal* portal_four = new Portal(0, 1, *room_two, true);
   portal_three->LinkPortal(*portal_four);
   portal_four->LinkPortal(*portal_three);
   level_.AddPortal(portal_three);
@@ -46,7 +46,7 @@ void GameEngine::GenerateLevels() {
   Item* empty_item = new Item("Space Laser", 0, 10, 0, 50, 5, 0);
   room_one->AddItem(empty_item, 4, 9);
 
-  Enemy* default_enemy = new Enemy(50, 10, 150, 2, 200);
+  Enemy* default_enemy = new Enemy(50, 10, 150, 2, 100);
   room_one->AddEnemy(default_enemy, 9, 1);
 
   level_.AddRoom(current_room_);
