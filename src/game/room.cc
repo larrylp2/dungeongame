@@ -233,7 +233,6 @@ bool Room::AddEnemyTo2DVector(Enemy* enemy, std::vector<std::vector<Enemy*>>& en
       enemy_loc.at(row).at(col) = enemy;
       MarkOccupied(row, col);
     } else {
-      std::cout << "Enemy Collision" << std::endl; //Collision with obstacle or enemy
       if (row + 1 < height_) {
         return AddEnemyTo2DVector(enemy, enemy_loc, row + 1, col);
       } else if (col + 1 < width_) {

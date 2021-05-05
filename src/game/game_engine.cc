@@ -79,7 +79,6 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
         current_room_->RemoveItem(player_->GetRow(), player_->GetCol());
         player_->AddItem(current_item);
         current_room_->UpdatePlayerHealth(player_->GetMaxHp(), player_->GetCurrHp(), player_->GetPlayerVit());
-        std::cout << "Picked Up Item" << std::endl;
       } else {
         //Checks through all portals in the room to see if one is at the player location
         std::vector<Portal*> portals = current_level_->GetPortals().at(current_room_->GetOrder());
@@ -88,7 +87,6 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
           Portal* current_portal = portals.at(index);
           if (current_portal->GetRoom()->GetOrder() == current_room_->GetOrder()) {
             if (player_->GetCol() == current_portal->GetCol() && player_->GetRow() == current_portal->GetRow()) {
-              std::cout << "Portal" << std::endl;
               portal_found = true;
               current_room_ = current_portal->Interact(player_);
               break;
@@ -107,7 +105,6 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
       }
     } else if (event_code == ci::app::KeyEvent::KEY_e) { //Handles inventory
       OpenInventory();
-      std::cout << "Open Inventory" << std::endl;
     } else if (event_code == ci::app::KeyEvent::KEY_UP) { //Fires projectiles in different directions
         player_->FireProjectile(0);
     } else if (event_code == ci::app::KeyEvent::KEY_DOWN) {
@@ -120,7 +117,6 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
   } else { //if the player is looking at their inventory
     if (event_code == ci::app::KeyEvent::KEY_e) {
       CloseInventory();
-      std::cout << "Close Inventory" << std::endl;
     }
   }
 
