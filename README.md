@@ -2,7 +2,7 @@
 
 ---
 
-####What is this Project?
+#### What is this Project?
 ![game](/readme_images/game.png)
 
 This project is a basic 2D grid based game where a player adventures between levels.
