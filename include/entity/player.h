@@ -21,6 +21,11 @@ class Player {
   Player();
 
   /**
+   * Destructor for a player
+   */
+  ~Player();
+
+  /**
    * Displays a player.
    */
   void Display();

@@ -19,6 +19,15 @@ Player::Player() {
   vitality_ = 1;
 }
 
+Player::~Player() {
+  for (size_t item = 0; item < inventory_.size(); item++) {
+    if (inventory_.at(item) != nullptr) {
+      delete inventory_.at(item);
+    }
+  }
+}
+
+
 void Player::Display() {
   //Temporarily an orange triangle to represent the player
   ci::gl::color(ci::Color("orange"));

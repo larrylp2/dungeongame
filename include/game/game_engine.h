@@ -58,8 +58,18 @@ private:
   void DisplayInventory() const;
 
   /**
-   * Interacts with the gate of the current level
+   * Displays a win
    */
+  void DisplayWin();
+
+  /**
+   * Displays a loss
+   */
+  void DisplayLoss();
+
+    /**
+     * Interacts with the gate of the current level
+     */
   void InteractGate();
 
   LevelGenerator level_gen_ = LevelGenerator(kWindowWidth, kWindowHeight, kRoomMargin);
@@ -72,10 +82,14 @@ private:
 
   size_t level_num_ = 1;
 
+  size_t levels_to_win = 3;
+
   //The player
-  Player player_ = Player();
+  Player* player_ = new Player();
 
   bool inventory_mode_ = false;
+
+  bool results_screen_ = false;
 
 };
 
