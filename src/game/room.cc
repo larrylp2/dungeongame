@@ -120,24 +120,21 @@ void Room::CheckProjectileCollisions() {
         Enemy* current_enemy = enemies_.at(row).at(col);
         if (current_enemy != nullptr) {
           double remaining_hp = current_enemy->TakeDamage(strength);
-          std::cout << "Hit Enemy!" << std::endl;
           if (remaining_hp <= 0) {
-            std::cout << "Killed" << std::endl;
             delete current_enemy;
             enemies_.at(row).at(col) = nullptr;
+            player_curr_hp_ += player_vit_;
           }
           RemoveProj(index);
         }
       } else {
         if (row == player_row_ && col == player_col_) {
-          std::cout << "Player Hit!" << std::endl;
           player_curr_hp_ -= strength;
           RemoveProj(index);
         }
       }
       Obstacle* current_obstacle = obstacles_.at(row).at(col);
       if (current_obstacle != nullptr) {
-        std::cout << "Obstacle Hit!" << std::endl;
         RemoveProj(index);
       }
     }
@@ -257,9 +254,10 @@ void Room::UpdatePlayerLocation(size_t row, size_t col) {
   player_col_ = col;
 }
 
-void Room::UpdatePlayerHealth(size_t max, size_t current) {
+void Room::UpdatePlayerHealth(size_t max, size_t current, size_t player_vit) {
   player_max_hp_ = max;
   player_curr_hp_ = current;
+  player_vit_ = player_vit;
 }
 
 

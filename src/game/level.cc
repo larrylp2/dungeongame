@@ -38,7 +38,15 @@ void Level::Display(size_t room_order) const {
   for (size_t index = 0; index < portals_.at(room_order).size(); index++) {
     portals_.at(room_order).at(index)->Display( rooms_.at(room_order)->GetGridSize());
   }
+  if (room_order == room_cap_ - 1) {
+    gate_->Display();
+  }
 }
+
+void Level::SetGate(Gate* gate) {
+  gate_ = gate;
+}
+
 
 
 }

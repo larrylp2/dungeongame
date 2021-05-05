@@ -6,6 +6,7 @@
 #include <vector>
 #include "game/room.h"
 #include "entity/portal.h"
+#include "entity/gate.h"
 
 namespace finalproject {
 
@@ -57,6 +58,13 @@ class Level {
    */
   std::vector<Room*> GetRooms() const;
 
+  /**
+   * Sets the gate within the level
+   *
+   * @param gate the gate within the level
+   */
+  void SetGate(Gate* gate);
+
  private:
   //The maximum number of rooms within this floor
   size_t room_cap_;
@@ -69,6 +77,9 @@ class Level {
 
   //The portals within the floor
   std::vector<std::vector<Portal*>> portals_;
+
+  //The gate of the floor
+  Gate* gate_;
 
 };
 

@@ -156,8 +156,9 @@ class Room {
    *
    * @param max the player's maximum health
    * @param current the player's current health
+   * @param player_vit the player's vit
    */
-  void UpdatePlayerHealth(size_t max, size_t current);
+  void UpdatePlayerHealth(size_t max, size_t current, size_t player_vit);
 
 
   /**
@@ -248,6 +249,9 @@ class Room {
 
   //Keeps track of the player's current health within the room (for projectiles
   size_t player_curr_hp_;
+
+  //Tracks player's vitality
+  size_t player_vit_;
 
   //The height of the game window
   double window_height_;

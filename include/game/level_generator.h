@@ -5,6 +5,7 @@
 #pragma once
 #include "game/level.h"
 #include "entity/enemy.h"
+#include "entity/gate.h"
 
 namespace finalproject {
 
@@ -24,6 +25,8 @@ private:
   void GenerateEnemies(Level* level) const;
 
   void GenerateObstacles(Level* level) const;
+
+  void GenerateItems(Level* level) const;
 
   double window_width_;
 

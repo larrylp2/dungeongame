@@ -43,10 +43,6 @@ class GameEngine : public ci::app::App {
   //Margin of the game window
   double kRoomMargin = 50;
 
-  // Generates levels for the game
-  // Idea is to make this method call a separate level generator class that creates room randomly
-  // void GenerateLevels();
-
 private:
 
   LevelGenerator level_gen_ = LevelGenerator(kWindowWidth, kWindowHeight, kRoomMargin);

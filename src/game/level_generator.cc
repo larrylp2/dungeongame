@@ -30,6 +30,9 @@ Level* LevelGenerator::GenerateLevel() const {
   //Create enemies within each room
   GenerateEnemies(level);
 
+  //Create items within the room
+  GenerateItems(level);
+
   //Create obstacles within the room
   GenerateObstacles(level);
 
@@ -49,17 +52,17 @@ void LevelGenerator::GenerateRooms(Level* level) const {
 
 void LevelGenerator::GeneratePortals(Level* level) const {
   //Every room will have two inter-portals except the first and last
+  //Last room will have a gate
   std::vector<Room*> rooms = level->GetRooms();
   for(size_t order = 0; order < kLevelSize; order++) {
+    Room* current_room = rooms.at(order);
+    size_t current_room_height = current_room->GetHeight();
+    size_t current_room_width = current_room->GetWidth();
+
+    //Generate a random location within the current room
+    int row = rand() % current_room_height;
+    int col = rand() % current_room_width;
     if (order < kLevelSize - 1) {
-      Room* current_room = rooms.at(order);
-      size_t current_room_height = current_room->GetHeight();
-      size_t current_room_width = current_room->GetWidth();
-
-      //Generate a random location within the current room
-      int row = rand() % current_room_height;
-      int col = rand() % current_room_width;
-
       Portal* start = new Portal(row, col, *current_room, true);
 
       Room* next_room = rooms.at(order + 1);
@@ -77,6 +80,10 @@ void LevelGenerator::GeneratePortals(Level* level) const {
       end->LinkPortal(*start);
       level->AddPortal(start);
       level->AddPortal(end);
+    } else {
+      current_room->MarkOccupied(row, col);
+      Gate* gate = new Gate(row, col);
+      level->SetGate(gate);
     }
   }
 }
@@ -92,14 +99,13 @@ void LevelGenerator::GenerateEnemies(Level *level) const {
     // Find the total number of possible grid squares there are
     size_t total_squares = current_room_height * current_room_width;
 
-    // No more than 1/5th of the room should be filled with enemies
     size_t enemy_max;
     int num_enemies;
     if (order == kLevelSize - 1) {
-      enemy_max = .05 * total_squares;
+      enemy_max = .05 * total_squares; //half as many enemies as normal room
       num_enemies = rand() % enemy_max + 5;
     } else {
-      enemy_max = .2 * total_squares;
+      enemy_max = .1 * total_squares; //In normal room, no more than 1/10th of squares
       num_enemies = rand() % enemy_max;
     }
 
@@ -153,6 +159,36 @@ void LevelGenerator::GenerateObstacles(Level* level) const {
     }
   }
 }
+
+void LevelGenerator::GenerateItems(Level* level) const {
+  //Every room will have 1 item, with the last room having a stronger item
+  std::vector<Room*> rooms = level->GetRooms();
+  for(size_t order = 0; order < kLevelSize; order++) {
+    Room* current_room = rooms.at(order);
+    size_t current_room_height = current_room->GetHeight();
+    size_t current_room_width = current_room->GetWidth();
+
+    int health = rand() % 50 + 50; // 50 to 100 health
+    int attack = rand() % 5 + 5; // 5 to 10 attack
+    int defense = rand() % 1; // 0 to 1 defense
+    int range = rand() % 20 + 10; // 10 to 30 range
+    int shot = rand() % 1; // 0 to 1 shot speed
+    int vit = rand() % 8; // 0 to 8 vitality
+    if (order == kLevelSize - 1) { //last room items have better stats
+      health += 50;
+      attack += 10;
+      range += 50;
+      shot += 1;
+    }
+
+    //Generate a random location within the current room
+    int row = rand() % current_room_height;
+    int col = rand() % current_room_width;
+    Item* item = new Item("item", health, attack, defense, range, shot, vit);
+    current_room->AddItem(item, row, col);
+  }
+}
+
 
 
 }

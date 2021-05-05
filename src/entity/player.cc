@@ -49,12 +49,13 @@ void Player::UpdateLocation(size_t row, size_t col) {
 void Player::UpdateRoom(Room* room) {
   current_room_ = room;
   current_room_->UpdatePlayerLocation(row_, col_);
-  current_room_->UpdatePlayerHealth(max_health_, current_health_);
+  current_room_->UpdatePlayerHealth(max_health_, current_health_, vitality_);
 }
 
 void Player::AddItem(Item* item) {
   inventory_.push_back(item);
   max_health_ += item->GetHealth();
+  current_health_ += item->GetHealth();
   attack_ += item->GetAttack();
   defense_ += item->GetDefense();
   range_ += item->GetRange();

@@ -16,50 +16,7 @@ GameEngine::GameEngine() {
   std::cout << "Current Room Located" << std::endl;
   player_.UpdateRoom(current_room_);
   std::cout << "Player Created" << std::endl;
-  //GenerateLevels();
 }
-/*
-void GameEngine::GenerateLevels() {
-  Room* room_one = new Room(10, 10, kRoomMargin, 0, kWindowHeight, kWindowWidth); //ten by ten grid
-  current_room_ = room_one;
-  player_ = Player();
-  player_.UpdateRoom(current_room_);
-
-  //Adds two portals to the current room
-  Portal portal_one(3, 3, *current_room_, false);
-  Portal portal_two(7, 7, *current_room_, false);
-  portal_one.LinkPortal(portal_two);
-  portal_two.LinkPortal(portal_one);
-
-  level_.AddPortal(&portal_one);
-  level_.AddPortal(&portal_two);
-
-  std::vector<std::tuple<size_t, size_t>> terrain = {std::make_tuple(1, 2),
-                                                     std::make_tuple(2, 3),
-                                                     std::make_tuple(3, 4),
-                                                     std::make_tuple(4, 5)};
-  current_room_->DesignateObstacles(terrain);
-
-  //Need to add constructors, destructors, etc
-  Room* room_two = new Room(2, 8, kRoomMargin, 1, kWindowHeight, kWindowWidth);
-  Portal* portal_three = new Portal(9, 9, *current_room_, true);
-  Portal* portal_four = new Portal(0, 1, *room_two, true);
-  portal_three->LinkPortal(*portal_four);
-  portal_four->LinkPortal(*portal_three);
-  level_.AddPortal(portal_three);
-  level_.AddPortal(portal_four);
-
-  Item* empty_item = new Item("Space Laser", 0, 10, 0, 50, 5, 0);
-  room_one->AddItem(empty_item, 4, 9);
-
-  Enemy* default_enemy = new Enemy(50, 10, 150, 2, 100);
-  room_one->AddEnemy(default_enemy, 9, 1);
-
-  level_.AddRoom(current_room_);
-  level_.AddRoom(room_two);
-  //Later replace with class that helps with random level generation
-}
- */
 
 
 void GameEngine::draw() {
