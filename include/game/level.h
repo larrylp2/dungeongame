@@ -24,6 +24,11 @@ class Level {
   Level(size_t room_cap);
 
   /**
+   * Destructor for a level
+   */
+  ~Level();
+
+  /**
    * Displays important objects within a room of the level
    *
    * @param room_order the index of the room to display information about
@@ -64,6 +69,13 @@ class Level {
    * @param gate the gate within the level
    */
   void SetGate(Gate* gate);
+
+  /**
+   * Gets the gate within the level
+   *
+   * @return the gate
+   */
+  Gate* GetGate() const;
 
  private:
   //The maximum number of rooms within this floor

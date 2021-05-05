@@ -12,6 +12,23 @@ Level::Level(size_t room_cap) {
   portals_ = std::vector<std::vector<Portal*>>(room_cap_, std::vector<Portal*>(0));
 }
 
+Level::~Level() {
+  //delete the rooms within the floor
+  for(size_t order = 0; order < rooms_.size(); order++) {
+    if (rooms_.at(order) != nullptr) {
+      delete rooms_.at(order);
+    }
+    for (size_t portal = 0; portal < portals_.at(order).size(); portal++) {
+      if (portals_.at(order).at(portal) != nullptr) {
+        delete portals_.at(order).at(portal);
+      }
+    }
+  }
+  //The gate of the floor
+  delete gate_;
+}
+
+
 void Level::AddPortal(Portal* portal) {
   Room* portal_room = portal->GetRoom();
   size_t index = portal_room->GetOrder();
@@ -46,6 +63,11 @@ void Level::Display(size_t room_order) const {
 void Level::SetGate(Gate* gate) {
   gate_ = gate;
 }
+
+Gate* Level::GetGate() const {
+  return gate_;
+}
+
 
 
 

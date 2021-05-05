@@ -34,6 +34,11 @@ class Room {
   Room(double height, double width, double margin, size_t order, double window_height, double window_width);
 
   /**
+   * Destructor for a room
+   */
+  ~Room();
+
+  /**
    * Displays the room within the game
    */
   void Display();

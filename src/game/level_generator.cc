@@ -189,7 +189,5 @@ void LevelGenerator::GenerateItems(Level* level) const {
   }
 }
 
-
-
 }
 

@@ -20,4 +20,13 @@ void Gate::Display() const {
   ci::gl::drawSolidRect(ci::Rectf(left_point, right_point));
 }
 
+size_t Gate::GetRow() const {
+  return row_;
+}
+
+
+size_t Gate::GetCol() const {
+  return col_;
+}
+
 }

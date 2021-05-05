@@ -23,6 +23,25 @@ Room::Room(double height, double width, double margin, size_t order, double wind
   std::srand(std::time(nullptr));
 }
 
+Room::~Room() {
+  for(size_t row = 0; row < occupied_.size(); row++) {
+    for(size_t col = 0; col < occupied_.size(); col++) {
+      if (items_.at(row).at(col) != nullptr) {
+        delete items_.at(row).at(col);
+      }
+
+      if (enemies_.at(row).at(col) != nullptr) {
+        delete enemies_.at(row).at(col);
+      }
+    }
+  }
+  for (size_t projectile = 0; projectile < projectiles_.size(); projectile++) {
+    if (projectiles_.at(projectile) != nullptr) {
+      delete projectiles_.at(projectile);
+    }
+  }
+}
+
 void Room::Display() {
   ExecuteEnemyActions();
   for (size_t row = 0; row < height_; row++) {
@@ -73,6 +92,15 @@ void Room::DisplayHealth() const {
   ci::gl::drawSolidRect(ci::Rectf(
           glm::vec2(kGridSide,  window_height_ - 2 * kGridSide),
           glm::vec2(health_ratio * (window_width_ - 2 * kGridSide) + kGridSide,  window_height_ - kGridSide)));
+
+  std::string summary;
+  summary.append("Health: ");
+  summary.append(std::to_string(player_curr_hp_));
+  summary.append(" / ");
+  summary.append(std::to_string(player_max_hp_));
+
+  ci::gl::drawString(summary, glm::vec2(kGridSide + 5, window_height_ - kGridSide - 10), ci::Color("black"));
+
 }
 
 
@@ -123,7 +151,11 @@ void Room::CheckProjectileCollisions() {
           if (remaining_hp <= 0) {
             delete current_enemy;
             enemies_.at(row).at(col) = nullptr;
-            player_curr_hp_ += player_vit_;
+            if (player_curr_hp_ += player_vit_ >= player_max_hp_) {
+              player_curr_hp_ = player_max_hp_;
+            } else {
+              player_curr_hp_ += player_vit_;
+            }
           }
           RemoveProj(index);
         }

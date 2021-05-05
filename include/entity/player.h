@@ -76,13 +76,25 @@ class Player {
   void FireProjectile(size_t direction) const;
 
   /**
-   * Makes this player take damage, returning the amount of health it has left
+   * Gets the player's max health
    *
-   * @param damage the amount of damage this enemy takes
-   * @return the new current health of this enemy
+   * @return the max hp
    */
-  double TakeDamage(double damage);
+  size_t GetMaxHp() const;
 
+  /**
+   * Gets the player's current health
+   *
+   * @return the current h[
+   */
+  size_t GetCurrHp() const;
+
+  /**
+   * Gets the player's vitality
+   *
+   * @return the vit
+   */
+  size_t GetPlayerVit() const;
 
  private:
   // The current room of the player

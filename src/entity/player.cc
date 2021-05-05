@@ -82,6 +82,21 @@ void Player::FireProjectile(size_t direction) const {
   current_room_->AddProjectile(proj);
 }
 
+size_t Player::GetMaxHp() const {
+  return max_health_;
+}
+
+size_t Player::GetCurrHp() const {
+  return current_health_;
+}
+
+size_t Player::GetPlayerVit() const {
+  return vitality_;
+}
+
+
+
+
 
 
 } // namespace finalproject

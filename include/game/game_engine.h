@@ -32,8 +32,6 @@ class GameEngine : public ci::app::App {
   void draw() override;
   void keyDown(ci::app::KeyEvent event) override;
 
-  void InteractGate(Gate* gate);
-
   //Width of the game window
   double kWindowWidth = 800;
 
@@ -41,23 +39,9 @@ class GameEngine : public ci::app::App {
   double kWindowHeight = 800;
 
   //Margin of the game window
-  double kRoomMargin = 50;
+  double kRoomMargin = 40;
 
 private:
-
-  LevelGenerator level_gen_ = LevelGenerator(kWindowWidth, kWindowHeight, kRoomMargin);
-
-  //The current room displayed on the screen
-  Room* current_room_;
-
-  //Current Level within the game
-  Level* current_level_;
-
-  //The player
-  Player player_ = Player();
-
-  bool inventory_mode_ = false;
-
   /**
    * Toggles the game to display the player's inventory.
    */
@@ -72,6 +56,26 @@ private:
    * Displays the player inventory
    */
   void DisplayInventory() const;
+
+  /**
+   * Interacts with the gate of the current level
+   */
+  void InteractGate();
+
+  LevelGenerator level_gen_ = LevelGenerator(kWindowWidth, kWindowHeight, kRoomMargin);
+
+  //The current room displayed on the screen
+  Room* current_room_;
+
+  //Current Level within the game
+  Level* current_level_;
+
+  size_t level_num_ = 1;
+
+  //The player
+  Player player_ = Player();
+
+  bool inventory_mode_ = false;
 
 };
 

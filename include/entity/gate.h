@@ -23,6 +23,19 @@ public:
    */
   void Display() const;
 
+  /**
+   * Gets the row of the gate
+   *
+   * @return the row
+   */
+  size_t GetRow() const;
+
+  /**
+   * Gets the column of the gate
+   *
+   * @return the col
+   */
+  size_t GetCol() const;
 
 private:
 
