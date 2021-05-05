@@ -20,7 +20,16 @@ Key | Action
 <kbd>r</kbd>|Restart Game
 ---
 ####Icons
-
+Icon | Representation
+----|--------
+![player](/readme_images/player.png)|Player
+![item](/readme_images/item.png)|Item
+![portal](/readme_images/portal.png)|Portal
+![gate](/readme_images/gate.png)|Gate
+![enemy](/readme_images/enemy.png)|Enemy
 ---
 ####How To Run
+To run this game, one must have Cinder and Cmake.
+After downloading, run the game_main.cc in the apps folder.
+
 
