@@ -30,7 +30,7 @@ Icon | Representation
 ![enemy](/readme_images/enemy.png)|Enemy
 ---
 #### How To Run
-To run this game, one must have Cinder and Cmake.
-After downloading, run the game_main.cc in the apps folder.
+Prior to running this game, one must have Cinder and Cmake.
+To play this game, run the game_main.cc in the apps folder.
 
 
