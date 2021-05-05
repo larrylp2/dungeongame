@@ -3,6 +3,7 @@
 ---
 
 ####What is this Project?
+![game](/readme_images/game.png)
 
 This project is a basic 2D grid based game where a player adventures between levels.
 Using the Cinder framework, this project randomly generates rooms that players must traverse through. 
@@ -19,7 +20,7 @@ Key | Action
 <kbd>e</kbd>|Inventory
 <kbd>r</kbd>|Restart Game
 ---
-####Icons
+#### Icons
 Icon | Representation
 ----|--------
 ![player](/readme_images/player.png)|Player
@@ -28,7 +29,7 @@ Icon | Representation
 ![gate](/readme_images/gate.png)|Gate
 ![enemy](/readme_images/enemy.png)|Enemy
 ---
-####How To Run
+#### How To Run
 To run this game, one must have Cinder and Cmake.
 After downloading, run the game_main.cc in the apps folder.
 
