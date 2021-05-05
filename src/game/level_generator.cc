@@ -41,12 +41,12 @@ Level* LevelGenerator::GenerateLevel() const {
 
 void LevelGenerator::GenerateRooms(Level* level) const {
   for (size_t order = 0; order < kLevelSize; order++) {
-    std::srand(std::time(nullptr) + order); //Need to add this else all rooms are generated with same dimensions
+    std::srand(std::time(nullptr) + order); //Rooms were generating the same way
     int room_height = rand() % 5 + 5; //Generate random number from 5 to 10
     int room_width =  rand() % 5 + 10; //Generate random number from 5 to 15
 
-    level->AddRoom(new Room(room_height, room_width, grid_margin_, order, window_height_, window_width_));
-    std::cout << room_height << " by " << room_width << " room added at order " << order << std::endl;
+    level->AddRoom(new Room(room_height, room_width, grid_margin_, order,
+                            window_height_, window_width_));
   }
 }
 
@@ -108,8 +108,6 @@ void LevelGenerator::GenerateEnemies(Level *level) const {
       enemy_max = .1 * total_squares; //In normal room, no more than 1/10th of squares
       num_enemies = rand() % enemy_max;
     }
-
-    std::cout << num_enemies << " enemies generated in room " << order << std::endl;
 
     for (size_t enemy = 0; enemy < num_enemies; enemy++) {
       int health = rand() % 120 + 50; // 50 to 170 health
@@ -189,5 +187,5 @@ void LevelGenerator::GenerateItems(Level* level) const {
   }
 }
 
-}
+} // namespace finalproject
 

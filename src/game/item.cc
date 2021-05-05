@@ -8,7 +8,6 @@ Item::Item(std::string name, size_t health, size_t attack, size_t defense, size_
   item_name_ = name;
   health_mod_ = health;
   attack_mod_ = attack;
-  defense_mod_ = defense;
   range_mod_ = range;
   shot_mod_ = shot;
   vitality_mod_ = vitality;
@@ -16,6 +15,7 @@ Item::Item(std::string name, size_t health, size_t attack, size_t defense, size_
 
 void Item::Display(size_t row, size_t col, size_t grid_size) const {
   ci::gl::color(ci::Color("yellow"));
+  //Item represented by yellow plus
   glm::vec2 left_point(col * grid_size + 2 * grid_size / 5, row * grid_size + 5);
   glm::vec2 right_point(col * grid_size + 3 * grid_size / 5, row * grid_size + grid_size - 5);
   ci::gl::drawSolidRect(ci::Rectf(left_point, right_point));
@@ -26,6 +26,7 @@ void Item::Display(size_t row, size_t col, size_t grid_size) const {
 }
 
 std::string Item::GetSummary() const {
+  //Generates a summary of the stats this item offers
   std::string info;
   info.append(item_name_);
   info.append("  |  ");
@@ -34,9 +35,6 @@ std::string Item::GetSummary() const {
   info.append("  ");
   info.append("ATK: ");
   info.append(std::to_string(attack_mod_));
-  info.append("  ");
-  info.append("DEF: ");
-  info.append(std::to_string(defense_mod_));
   info.append("  ");
   info.append("RNG: ");
   info.append(std::to_string(range_mod_));
@@ -58,10 +56,6 @@ size_t Item::GetAttack() const {
   return attack_mod_;
 }
 
-size_t Item::GetDefense() const {
-  return defense_mod_;
-}
-
 size_t Item::GetRange() const {
   return range_mod_;
 }
@@ -74,5 +68,4 @@ size_t Item::GetVitality() const {
   return vitality_mod_;
 }
 
-
-}
+} // namespace finalproject

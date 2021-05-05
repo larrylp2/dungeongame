@@ -102,32 +102,36 @@ class Player {
   size_t GetPlayerVit() const;
 
  private:
-  // The current room of the player
+  //The current room of the player
   Room* current_room_;
 
-  // The row of the player
+  //The row of the player
   size_t row_;
 
-  // The col of the player
+  //The col of the player
   size_t col_;
 
-  // The inventory of the player
+  //The inventory of the player
   std::vector<Item*> inventory_;
 
+  //The player's maximum health
   size_t max_health_;
 
+  //The player's current health
   size_t current_health_;
 
+  //The player's attack damage
   size_t attack_;
 
-  size_t defense_;
-
+  //The player's range
   size_t range_;
 
+  //The player's shot speed
   size_t shot_;
 
+  //The players vitality (how much is healed from defeating enemies)
   size_t vitality_;
 
 };
 
-}
+} // namespace finalproject

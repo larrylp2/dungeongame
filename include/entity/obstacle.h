@@ -7,6 +7,9 @@
 
 namespace finalproject {
 
+/**
+ * Class that represents a obstacle that cannot be traveled to or shot through.
+ */
 class Obstacle {
  public:
   /**
@@ -22,9 +25,6 @@ class Obstacle {
    * @param grid_size the size of the grid square occupied by the obstacle
    */
   void Display(size_t row, size_t col, size_t grid_size) const;
-
 };
 
-
-
-}
+} // namespace finalproject

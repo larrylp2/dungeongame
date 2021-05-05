@@ -72,6 +72,7 @@ private:
      */
   void InteractGate();
 
+  //Helps generate levels for the game
   LevelGenerator level_gen_ = LevelGenerator(kWindowWidth, kWindowHeight, kRoomMargin);
 
   //The current room displayed on the screen
@@ -80,17 +81,21 @@ private:
   //Current Level within the game
   Level* current_level_;
 
+  //The number of the current level
   size_t level_num_ = 1;
 
+  //The number of levels the player needs to complete to win (TBD)
   size_t levels_to_win = 3;
 
   //The player
   Player* player_ = new Player();
 
+  //A boolean representing if the player is viewing the inventory
   bool inventory_mode_ = false;
 
+  //A boolean representing if the player has won or lost and is on a results screen
   bool results_screen_ = false;
 
 };
 
-}
+} // namespace finalproject

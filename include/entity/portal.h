@@ -10,8 +10,7 @@
 namespace finalproject {
 
 /**
- * Handles a portal that teleports a player to a new location
- * (currently only within a room, not between rooms)
+ * Handles a portal that teleports a player to a new location.
  */
 class Portal {
  public:
@@ -33,21 +32,21 @@ class Portal {
   void LinkPortal(Portal& destination);
 
   /**
-   * Displays a portal
+   * Displays a portal.
    *
    * @param gird_size the size of one grid square
    */
   void Display(size_t grid_size) const;
 
   /**
-   * Gets the row of this portal
+   * Gets the row of this portal.
    *
    * @return the row
    */
   size_t GetRow() const;
 
   /**
-   * Gets the column of this portal
+   * Gets the column of this portal.
    *
    * @return the portal
    */
@@ -61,7 +60,7 @@ class Portal {
   Room* GetRoom() const;
 
   /**
-   * Handles portal interaction by a player
+   * Handles portal interaction by a player.
    *
    * @param player the player who entered the portal
    * @return the room the destination portal is in
@@ -78,9 +77,11 @@ class Portal {
   //If this portal leads to another room, or remains in the same room
   bool another_;
 
+  //The column location of the portal
   size_t col_;
 
+  //The row location of the portal
   size_t row_;
 };
 
-}
+} // namespace finalproject

@@ -17,12 +17,11 @@ namespace finalproject {
 
 /**
  * Class that represents a room within the game that the player can explore.
- * (need to adjust entities/portals to fit onto tiles to make easier)
  */
 class Room {
  public:
   /**
-   * Constructor for a room of a certain size
+   * Constructor for a room of a certain size.
    *
    * @param height the height of the room
    * @param width the width of the room
@@ -34,22 +33,22 @@ class Room {
   Room(double height, double width, double margin, size_t order, double window_height, double window_width);
 
   /**
-   * Destructor for a room
+   * Destructor for a room.
    */
   ~Room();
 
   /**
-   * Displays the room within the game
+   * Displays the room within the game.
    */
   void Display();
 
   /**
-   * Displays the player's health bar
+   * Displays the player's health bar.
    */
   void DisplayHealth() const;
 
   /**
-   * Adds an obstacle to this room
+   * Adds an obstacle to this room.
    *
    * @param row the row of the obstacle
    * @param col the column fo the obstacle
@@ -57,22 +56,22 @@ class Room {
   void DesignateObstacle(size_t row, size_t col);
 
   /**
-   * Gets the obstacles within the room
+   * Gets the obstacles within the room.
    */
   std::vector<std::vector<Obstacle*>> GetObstacles() const;
 
   /**
-   * Gets the items within the room
+   * Gets the items within the room.
    */
   std::vector<std::vector<Item*>> GetItems() const;
 
   /**
-   * Gets the enemies within the room
+   * Gets the enemies within the room.
    */
   std::vector<std::vector<Enemy*>> GetEnemies() const;
 
   /**
-   * Exectues the movements and attacks of enemies within the room
+   * Exectues the movements and attacks of enemies within the room.
    */
   void ExecuteEnemyActions();
 
@@ -88,17 +87,17 @@ class Room {
    */
   bool AddEnemyTo2DVector(Enemy* enemy, std::vector<std::vector<Enemy*>>& enemy_loc, size_t row, size_t col);
 
-    /**
-     * Adds an item to the room at a certain position
-     *
-     * @param item the item to add to the room
-     * @param row the row of the item
-     * @param col the column of the item
-     */
+  /**
+   * Adds an item to the room at a certain position.
+   *
+   * @param item the item to add to the room
+   * @param row the row of the item
+   * @param col the column of the item
+   */
   void AddItem(Item* item, size_t row, size_t col);
 
   /**
-   * Adds an enemy to the room at a certain position
+   * Adds an enemy to the room at a certain position.
    *
    * @param enemy the enemy to add to the room
    * @param row the row of the item
@@ -114,7 +113,7 @@ class Room {
   void AddProjectile(Projectile* proj);
 
   /**
-   * Removes an item from the room
+   * Removes an item from the room.
    *
    * @param row the row location of the item
    * @param col the col location of the item
@@ -122,21 +121,11 @@ class Room {
   void RemoveItem(size_t row, size_t col);
 
   /**
-   * Removes a projectile from the room
+   * Removes a projectile from the room.
    *
    * @param index the projectile to remove
    */
   void RemoveProj(size_t index);
-
-  /**
-   * Checks and resizes vector of projectile pointers
-   */
-  void CleanProjectiles();
-
-  /**
-   * Checks projectile collisions.
-   */
-  void CheckProjectileCollisions();
 
   /**
    * Gets the grid side size
@@ -144,12 +133,12 @@ class Room {
   double GetGridSize() const;
 
   /**
-   * Gets the index of this room within a level
+   * Gets the index of this room within a level.
    */
   size_t GetOrder() const;
 
   /**
-   * Updates the player's saved location
+   * Updates the player's saved location.
    *
    * @param row the player's row
    * @param col the player's col
@@ -157,7 +146,7 @@ class Room {
   void UpdatePlayerLocation(size_t row, size_t col);
 
   /**
-   * Updates the player's health within the room
+   * Updates the player's health within the room.
    *
    * @param max the player's maximum health
    * @param current the player's current health
@@ -167,7 +156,7 @@ class Room {
 
 
   /**
-   * Gets the height of this room
+   * Gets the height of this room.
    *
    * @return the height
    */
@@ -175,7 +164,7 @@ class Room {
 
 
   /**
-   * Gets the width of this room
+   * Gets the width of this room.
    *
    * @return the width
    */
@@ -183,21 +172,21 @@ class Room {
 
 
   /**
-   * Gets the player's max hp
+   * Gets the player's max hp.
    *
    * @return maximum health
    */
   size_t GetMax() const;
 
   /**
-   * Gets the player's current hp
+   * Gets the player's current hp.
    *
    * @return current health
    */
   size_t GetCurrent() const;
 
   /**
-   * Marks a location occupied within the room
+   * Marks a location occupied within the room.
    *
    * @param row the row to be occupied
    * @param col the col to be occupied
@@ -205,7 +194,7 @@ class Room {
   void MarkOccupied(size_t row, size_t col);
 
   /**
-   * Marks a location unoccupied within the room
+   * Marks a location unoccupied within the room.
    *
    * @param row the row to be vacant
    * @param col the col to be vacant
@@ -213,6 +202,16 @@ class Room {
   void MarkVacant(size_t row, size_t col);
 
  private:
+  /**
+  * Checks and resizes vector of projectile pointers.
+  */
+  void CleanProjectiles();
+
+  /**
+   * Checks projectile collisions.
+   */
+  void CheckProjectileCollisions();
+
   //The obstacles within this room
   std::vector<std::vector<Obstacle*>> obstacles_;
 
@@ -265,5 +264,4 @@ class Room {
   double window_width_;
 };
 
-
-}
+} // namespace finalproject

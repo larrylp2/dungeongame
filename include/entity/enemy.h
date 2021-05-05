@@ -11,7 +11,7 @@ namespace finalproject {
 class Enemy {
  public:
   /**
-   * Constructor for an enemy
+   * Constructor for an enemy.
    *
    * @param max_health the enemy's max health
    * @param attack the enemy's attack
@@ -31,7 +31,8 @@ class Enemy {
   void Display(size_t row, size_t col, size_t grid_size) const;
 
   /**
-   * Draws an enemy's health bar
+   * Draws an enemy's health bar.
+   *
    * @param row the row to display
    * @param col the column to display
    * @param grid_size the size of the grid square occupied by the enemy
@@ -39,7 +40,7 @@ class Enemy {
   void DrawHealthBar(size_t row, size_t col, size_t grid_size) const;
 
   /**
-   * Makes this enemy take damage, returning the amount of health it has left
+   * Makes this enemy take damage, returning the amount of health it has left.
    *
    * @param damage the amount of damage this enemy takes
    * @return the new current health of this enemy
@@ -47,7 +48,7 @@ class Enemy {
   double TakeDamage(double damage);
 
   /**
-   * Generates and returns a projectile from this enemy
+   * Generates and returns a projectile from this enemy.
    *
    * @param row the row of the projectile
    * @param col the column of the projectile
@@ -56,30 +57,29 @@ class Enemy {
    */
   Projectile* FireProjectile(size_t row, size_t col, size_t direct, size_t grid) const;
 
-  /*
-   * Returns the fire frequency, a number that determines how often this enemy shoots
+  /**
+   * Returns the fire frequency, a number that determines how often this enemy shoots.
    */
   size_t GetFireFrequency() const;
 
  private:
-  std::string name_ = "default";
-
+  //How frequent this enemy shoots
   size_t fire_frequency_;
 
+  //The maximum health of this enemy
   double max_health_;
 
+  //The current health of this enemy
   double current_health_;
 
+  //How much damage attacks from this enemy does to a player
   size_t attack_;
 
+  //The range of shots fired by this enemy
   size_t range_;
 
+  //The speed of shots fired by this enemy
   size_t shot_;
-
 };
 
-
-
-
-
-}
+} // namespace finalproject

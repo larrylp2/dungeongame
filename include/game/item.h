@@ -39,49 +39,42 @@ class Item {
   void Display(size_t row, size_t col, size_t grid_size) const;
 
   /**
-   * Returns a string representation summarizing this item's information
+   * Returns a string representation summarizing this item's information.
    *
    * @return a string describing this item
    */
   std::string GetSummary() const;
 
   /**
-   * Returns the item's health mod
+   * Returns the item's health mod.
    *
    * @return health mod
    */
   size_t GetHealth() const;
 
   /**
-   * Returns the item's attack mod
+   * Returns the item's attack mod.
    *
    * @return attack mod
    */
   size_t GetAttack() const;
 
   /**
-   * Returns the item's defense mod
-   *
-   * @return defense mod
-   */
-  size_t GetDefense() const;
-
-  /**
-   * Returns the item's range mod
+   * Returns the item's range mod.
    *
    * @return range mod
    */
   size_t GetRange() const;
 
   /**
-   * Returns the item's shot speed mod
+   * Returns the item's shot speed mod.
    *
    * @return shot mod
    */
   size_t GetShot() const;
 
   /**
-   * Returns the item's vitality mod
+   * Returns the item's vitality mod.
    *
    * @return vitality mod
    */
@@ -89,6 +82,7 @@ class Item {
 
 private:
 
+  //The name of the item
   std::string item_name_;
 
   //How much this item alters the health of the player
@@ -96,9 +90,6 @@ private:
 
   //How much this item alters the attack of the player
   size_t attack_mod_;
-
-  //How much this item alters the defense of the player
-  size_t defense_mod_;
 
   //How much this item alters the range of the player
   size_t range_mod_;
@@ -109,9 +100,6 @@ private:
   //How much this item alters the vitality of the player
   size_t vitality_mod_;
 
-
-
 };
 
-
-}
+} // namespace finalproject

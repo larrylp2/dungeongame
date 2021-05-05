@@ -29,4 +29,4 @@ size_t Gate::GetCol() const {
   return col_;
 }
 
-}
+} // namespace finalproject

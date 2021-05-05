@@ -18,16 +18,16 @@ Level::~Level() {
     if (rooms_.at(order) != nullptr) {
       delete rooms_.at(order);
     }
+    //Deletes the portals within the floor
     for (size_t portal = 0; portal < portals_.at(order).size(); portal++) {
       if (portals_.at(order).at(portal) != nullptr) {
         delete portals_.at(order).at(portal);
       }
     }
   }
-  //The gate of the floor
+  //deletes the gate of the floor
   delete gate_;
 }
-
 
 void Level::AddPortal(Portal* portal) {
   Room* portal_room = portal->GetRoom();
@@ -44,13 +44,13 @@ std::vector<Room*> Level::GetRooms() const {
   return rooms_;
 }
 
-
 void Level::AddRoom(Room* room) {
   rooms_.at(room->GetOrder()) = room;
   room_num_++;
 }
 
 void Level::Display(size_t room_order) const {
+  //Displays the room, then displays all the portals or gates within the room
   rooms_.at(room_order)->Display();
   for (size_t index = 0; index < portals_.at(room_order).size(); index++) {
     portals_.at(room_order).at(index)->Display( rooms_.at(room_order)->GetGridSize());
@@ -68,7 +68,4 @@ Gate* Level::GetGate() const {
   return gate_;
 }
 
-
-
-
-}
+} // namespace finalproject

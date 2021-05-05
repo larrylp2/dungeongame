@@ -29,49 +29,49 @@ class Level {
   ~Level();
 
   /**
-   * Displays important objects within a room of the level
+   * Displays important objects within a room of the level.
    *
    * @param room_order the index of the room to display information about
    */
   void Display(size_t room_order) const;
 
   /**
-   * Adds a room to a level
+   * Adds a room to a level.
    *
    * @param room the room to add
    */
   void AddRoom(Room* room);
 
   /**
-   * Ads a portal to the level
+   * Ads a portal to the level.
    *
    * @param portal the portal to add
    */
   void AddPortal(Portal* portal);
 
   /**
-   * Gets the portals within the level
+   * Gets the portals within the level.
    *
    * @return the portals within the level
    */
   std::vector<std::vector<Portal*>> GetPortals() const;
 
   /**
-   * Gets the rooms within the level
+   * Gets the rooms within the level.
    *
    * @return the rooms within the level
    */
   std::vector<Room*> GetRooms() const;
 
   /**
-   * Sets the gate within the level
+   * Sets the gate within the level.
    *
    * @param gate the gate within the level
    */
   void SetGate(Gate* gate);
 
   /**
-   * Gets the gate within the level
+   * Gets the gate within the level.
    *
    * @return the gate
    */
@@ -95,4 +95,4 @@ class Level {
 
 };
 
-}
+} // namespace finalproject

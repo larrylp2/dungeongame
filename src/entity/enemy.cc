@@ -30,7 +30,8 @@ void Enemy::DrawHealthBar(size_t row, size_t col, size_t grid_size) const {
 
   ci::gl::color(ci::Color("green"));
   glm::vec2 left_point(col * grid_size + 5, row * grid_size + (2 * grid_size / 15));
-  glm::vec2 right_point(col * grid_size + 5 + health_percentage * (grid_size - 10), row * grid_size + (4 * grid_size / 15));
+  glm::vec2 right_point(col * grid_size + 5 + health_percentage * (grid_size - 10),
+                        row * grid_size + (4 * grid_size / 15));
   ci::gl::drawSolidRect(ci::Rectf(left_point, right_point));
 }
 
@@ -48,6 +49,5 @@ size_t Enemy::GetFireFrequency() const {
   return fire_frequency_;
 }
 
-
-}
+} // namespace finalproject
 

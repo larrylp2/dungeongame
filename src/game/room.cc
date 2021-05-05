@@ -6,7 +6,8 @@
 
 namespace finalproject {
 
-Room::Room(double height, double width, double margin, size_t order, double window_height, double window_width) {
+Room::Room(double height, double width, double margin, size_t order,
+           double window_height, double window_width) {
   height_ = height;
   width_ = width;
   margin_ = margin;
@@ -24,6 +25,7 @@ Room::Room(double height, double width, double margin, size_t order, double wind
 }
 
 Room::~Room() {
+  //Goes through each grid position, deleting items and enemies
   for(size_t row = 0; row < occupied_.size(); row++) {
     for(size_t col = 0; col < occupied_.size(); col++) {
       if (items_.at(row).at(col) != nullptr) {
@@ -35,6 +37,7 @@ Room::~Room() {
       }
     }
   }
+  //Deletes each projectile
   for (size_t projectile = 0; projectile < projectiles_.size(); projectile++) {
     if (projectiles_.at(projectile) != nullptr) {
       delete projectiles_.at(projectile);
@@ -43,7 +46,9 @@ Room::~Room() {
 }
 
 void Room::Display() {
+  //First updates enemy locations
   ExecuteEnemyActions();
+  //Then iterate through grid locations, drawing obstacles, items, and enemies
   for (size_t row = 0; row < height_; row++) {
     for(size_t column = 0; column < width_; column++) {
       //Draws a grid from many empty rectangles
@@ -65,6 +70,8 @@ void Room::Display() {
       }
     }
   }
+
+  //Checks for projectile collisions, drawing projectiles that are still valid
   CheckProjectileCollisions();
   for (size_t index = 0; index < projectiles_.size(); index++) {
     Projectile* current_proj = projectiles_.at(index);
@@ -91,18 +98,20 @@ void Room::DisplayHealth() const {
 
   ci::gl::drawSolidRect(ci::Rectf(
           glm::vec2(kGridSide,  window_height_ - 2 * kGridSide),
-          glm::vec2(health_ratio * (window_width_ - 2 * kGridSide) + kGridSide,  window_height_ - kGridSide)));
+          glm::vec2(health_ratio * (window_width_ - 2 * kGridSide) + kGridSide,
+                    window_height_ - kGridSide)));
 
+  //Creates a string summary of the player's health to write inside the bar
   std::string summary;
   summary.append("Health: ");
   summary.append(std::to_string(player_curr_hp_));
   summary.append(" / ");
   summary.append(std::to_string(player_max_hp_));
 
-  ci::gl::drawString(summary, glm::vec2(kGridSide + 5, window_height_ - kGridSide - 10), ci::Color("black"));
+  ci::gl::drawString(summary, glm::vec2(kGridSide + 5, window_height_ - kGridSide - 10),
+                     ci::Color("black"));
 
 }
-
 
 void Room::AddItem(Item* item, size_t row, size_t col) {
   items_.at(row).at(col) = item;
@@ -124,6 +133,7 @@ void Room::RemoveProj(size_t index) {
 }
 
 void Room::CleanProjectiles() {
+  //Resizes projectile vector if all nullptrs
   bool all_null = true;
   for (size_t proj = 0; proj < projectiles_.size(); proj++) {
     if (projectiles_.at(proj) != nullptr) {
@@ -136,8 +146,8 @@ void Room::CleanProjectiles() {
   }
 }
 
-
 void Room::CheckProjectileCollisions() {
+  //Checks for each projectile if touching an enemy or player, updating healths and projectiles
   for (size_t index = 0; index < projectiles_.size(); index++) {
     Projectile* current_proj = projectiles_.at(index);
     if (current_proj != nullptr) {
@@ -174,7 +184,6 @@ void Room::CheckProjectileCollisions() {
   CleanProjectiles();
 }
 
-
 void Room::RemoveItem(size_t row, size_t col) {
   items_.at(row).at(col) = nullptr;
   MarkVacant(row, col);
@@ -204,7 +213,12 @@ std::vector<std::vector<Enemy*>> Room::GetEnemies() const {
   return enemies_;
 }
 
-bool Room::AddEnemyTo2DVector(Enemy* enemy, std::vector<std::vector<Enemy*>>& enemy_loc, size_t row, size_t col) {
+bool Room::AddEnemyTo2DVector(Enemy* enemy, std::vector<std::vector<Enemy*>>& enemy_loc,
+                              size_t row, size_t col) {
+  //Helps with updating enemy positions
+  //First checks the location where the enemy is originally assigned
+  //If there is a collision or conflict, places the enemy in a nearby square
+  //If no possible squares after all recursive calls, deletes enemy entirely
   if (row >= 0 && col >= 0 && row < height_ && col < width_) {
     if (enemy_loc.at(row).at(col) == nullptr && obstacles_.at(row).at(col) == nullptr) {
       enemy_loc.at(row).at(col) = enemy;
@@ -237,7 +251,8 @@ void Room::ExecuteEnemyActions() {
     for (size_t col = 0; col < enemies_.at(0).size(); col++) {
       Enemy* current_enemy = enemies_.at(row).at(col);
       MarkVacant(row, col);
-      if (current_enemy != nullptr) { //If this enemy exists, generate random number to determine its direction of movement
+      if (current_enemy != nullptr) {
+        //If this enemy exists, generate random number to determine its direction of movement
         //Generate random number from 0 to 250, only moving when that number falls between 0 to 4
         int number = rand() % 250;
 
@@ -254,13 +269,15 @@ void Room::ExecuteEnemyActions() {
         } else {
           move_successful = AddEnemyTo2DVector(current_enemy, new_enemy_loc, row, col);
         }
-        if (!move_successful) { //Maintains the enemy's current position if it tried to be moved out of bounds
+        if (!move_successful) {
+          //Maintains the enemy's current position if it tried to be moved out of bounds
           AddEnemyTo2DVector(current_enemy, new_enemy_loc, row, col);
         }
 
         //Handles Projectiles
         size_t fire_freq = current_enemy->GetFireFrequency();
-        //Generate random number from 0 to firing frequency, only firing a projectile when number is between 0 and 4
+        //Generate random number from 0 to firing frequency
+        //Only firing a projectile when number is between 0 and 4
         number = rand() % fire_freq;
         if (number <= 1) { //Fires north
           AddProjectile(current_enemy->FireProjectile(row, col, 0, kGridSide));
@@ -316,8 +333,5 @@ void Room::MarkOccupied(size_t row, size_t col) {
 void Room::MarkVacant(size_t row, size_t col) {
   occupied_.at(row).at(col) = false;
 }
-
-
-
 
 } // namespace finalproject

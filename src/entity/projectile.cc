@@ -20,7 +20,8 @@ Projectile::Projectile(size_t row, size_t col, size_t direction, float range, do
 
 size_t Projectile::Display(size_t room_width, size_t room_height) {
   UpdateLocation();
-  if (row_ < 0 || col_ < 0 || row_ >= room_height || col_ >= room_width) { //Catches projectiles leaving the room
+  //Catches projectiles leaving the room
+  if (row_ < 0 || col_ < 0 || row_ >= room_height || col_ >= room_width) {
     return 0;
   } else {
     if (player_proj_) {
@@ -29,7 +30,8 @@ size_t Projectile::Display(size_t room_width, size_t room_height) {
       ci::gl::color(ci::Color("red")); // enemy projectiles are red
     }
     glm::vec2 center_point(x_, y_);
-    ci::gl::drawSolidCircle(center_point, sqrt(strength_) + 1); //sqrt to prevent size to grow too fast
+    ci::gl::drawSolidCircle(center_point, sqrt(strength_) + 1);
+    //sqrt to prevent size from growing too large
     return range_;
   }
 }
@@ -66,4 +68,4 @@ bool Projectile::IsPlayer() const {
 }
 
 
-}
+} // namespace finalproject
