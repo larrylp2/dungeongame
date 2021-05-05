@@ -68,9 +68,8 @@ list(APPEND SOURCE_FILES    ${ENTITY_SOURCE_FILES}
                             src/game/room.cc)
 
 # Need to add more test files
-list(APPEND TEST_FILES tests/test_game_engine.cc
-        tests/test_player.cc
-        tests/test_room.cc)
+list(APPEND TEST_FILES tests/test_game.cc
+        tests/test_entity.cc)
 
 # This works
 ci_make_app(

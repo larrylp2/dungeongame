@@ -114,11 +114,17 @@ void Room::DisplayHealth() const {
 }
 
 void Room::AddItem(Item* item, size_t row, size_t col) {
+  if (row < 0 || col < 0 || row >= height_ || col >= width_) {
+    throw std::invalid_argument("Item added out of bounds");
+  }
   items_.at(row).at(col) = item;
   MarkOccupied(row, col);
 }
 
 void Room::AddEnemy(Enemy* enemy, size_t row, size_t col) {
+  if (row < 0 || col < 0 || row >= height_ || col >= width_) {
+    throw std::invalid_argument("Enemy added out of bounds");
+  }
   enemies_.at(row).at(col) = enemy;
   MarkOccupied(row, col);
 }
@@ -195,6 +201,9 @@ double Room::GetGridSize() const {
 }
 
 void Room::DesignateObstacle(size_t row, size_t col) {
+  if (row < 0 || col < 0 || row >= height_ || col >= width_) {
+    throw std::invalid_argument("Obstacle added out of bounds");
+  }
   Obstacle obstacle = Obstacle();
   if (!occupied_.at(row).at(col)) {
     obstacles_.at(row).at(col) = &obstacle;

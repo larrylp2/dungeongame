@@ -4,7 +4,7 @@
 #include "game/item.h"
 namespace finalproject {
 
-Item::Item(std::string name, size_t health, size_t attack, size_t defense, size_t range, size_t shot, size_t vitality) {
+Item::Item(std::string name, size_t health, size_t attack, size_t range, size_t shot, size_t vitality) {
   item_name_ = name;
   health_mod_ = health;
   attack_mod_ = attack;

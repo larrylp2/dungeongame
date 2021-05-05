@@ -19,15 +19,14 @@ class Item {
   /**
    * Constructor for an item.
    *
-   * @param name
-   * @param health
-   * @param attack
-   * @param defense
-   * @param speed
-   * @param shot
-   * @param vitality
+   * @param name the name of the item
+   * @param health the health of the item
+   * @param attack the attack of the item
+   * @param range the range of the item
+   * @param shot the shot speed of the item
+   * @param vitality the vitality of the item
    */
-  Item(std::string name, size_t health, size_t attack, size_t defense, size_t speed, size_t shot, size_t vitality);
+  Item(std::string name, size_t health, size_t attack, size_t range, size_t shot, size_t vitality);
 
   /**
    * Displays the item.

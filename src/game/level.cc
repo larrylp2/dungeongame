@@ -32,7 +32,11 @@ Level::~Level() {
 void Level::AddPortal(Portal* portal) {
   Room* portal_room = portal->GetRoom();
   size_t index = portal_room->GetOrder();
-  portals_.at(index).push_back(portal);
+  if (index >= room_cap_) {
+    throw std::invalid_argument("Added Portal has Invalid Room");
+  } else {
+    portals_.at(index).push_back(portal);
+  }
 }
 
 
@@ -45,6 +49,9 @@ std::vector<Room*> Level::GetRooms() const {
 }
 
 void Level::AddRoom(Room* room) {
+  if (room->GetOrder() >= room_cap_) {
+    throw std::invalid_argument("Invalid Room Added to Level");
+  }
   rooms_.at(room->GetOrder()) = room;
   room_num_++;
 }

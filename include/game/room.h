@@ -71,23 +71,6 @@ class Room {
   std::vector<std::vector<Enemy*>> GetEnemies() const;
 
   /**
-   * Exectues the movements and attacks of enemies within the room.
-   */
-  void ExecuteEnemyActions();
-
-  /**
-   * Helper method that adds an enemy to an existing 2d vector of enemies.
-   * Resolving potential conflicts if two enemies want to move to the save square.
-   *
-   * @param enemy the enemy to add
-   * @param enemy_loc the 2D vector of other enemies locations
-   * @param row the row
-   * @param col the col
-   * @return a boolean if the enemy's move coordinates were within the grid
-   */
-  bool AddEnemyTo2DVector(Enemy* enemy, std::vector<std::vector<Enemy*>>& enemy_loc, size_t row, size_t col);
-
-  /**
    * Adds an item to the room at a certain position.
    *
    * @param item the item to add to the room
@@ -154,7 +137,6 @@ class Room {
    */
   void UpdatePlayerHealth(size_t max, size_t current, size_t player_vit);
 
-
   /**
    * Gets the height of this room.
    *
@@ -162,14 +144,12 @@ class Room {
    */
   size_t GetHeight() const;
 
-
   /**
    * Gets the width of this room.
    *
    * @return the width
    */
   size_t GetWidth() const;
-
 
   /**
    * Gets the player's max hp.
@@ -203,6 +183,11 @@ class Room {
 
  private:
   /**
+  * Exectues the movements and attacks of enemies within the room.
+  */
+  void ExecuteEnemyActions();
+
+  /**
   * Checks and resizes vector of projectile pointers.
   */
   void CleanProjectiles();
@@ -211,6 +196,18 @@ class Room {
    * Checks projectile collisions.
    */
   void CheckProjectileCollisions();
+
+  /**
+   * Helper method that adds an enemy to an existing 2d vector of enemies.
+   * Resolving potential conflicts if two enemies want to move to the save square.
+   *
+   * @param enemy the enemy to add
+   * @param enemy_loc the 2D vector of other enemies locations
+   * @param row the row
+   * @param col the col
+   * @return a boolean if the enemy's move coordinates were within the grid
+   */
+  bool AddEnemyTo2DVector(Enemy* enemy, std::vector<std::vector<Enemy*>>& enemy_loc, size_t row, size_t col);
 
   //The obstacles within this room
   std::vector<std::vector<Obstacle*>> obstacles_;

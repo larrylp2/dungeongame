@@ -53,6 +53,8 @@ void LevelGenerator::GenerateRooms(Level* level) const {
 void LevelGenerator::GeneratePortals(Level* level) const {
   //Every room will have two inter-portals except the first and last
   //Last room will have a gate
+  int row2 = 0;
+  int col2 = 0;
   std::vector<Room*> rooms = level->GetRooms();
   for(size_t order = 0; order < kLevelSize; order++) {
     Room* current_room = rooms.at(order);
@@ -62,6 +64,12 @@ void LevelGenerator::GeneratePortals(Level* level) const {
     //Generate a random location within the current room
     int row = rand() % current_room_height;
     int col = rand() % current_room_width;
+
+    //To prevent new portals to generate on top of other portals
+    while (row == row2 && col == col2) {
+      row = rand() % current_room_height;
+      col = rand() % current_room_width;
+    }
     if (order < kLevelSize - 1) {
       Portal* start = new Portal(row, col, *current_room, true);
 
@@ -70,8 +78,8 @@ void LevelGenerator::GeneratePortals(Level* level) const {
       size_t next_room_width = next_room->GetWidth();
 
       //Generate a random location within the current room
-      int row2 = rand() % next_room_height;
-      int col2 = rand() % next_room_width;
+      row2 = rand() % next_room_height;
+      col2 = rand() % next_room_width;
 
       Portal* end = new Portal(row2, col2, *next_room, true);
 
@@ -168,7 +176,6 @@ void LevelGenerator::GenerateItems(Level* level) const {
 
     int health = rand() % 50 + 50; // 50 to 100 health
     int attack = rand() % 5 + 5; // 5 to 10 attack
-    int defense = rand() % 1; // 0 to 1 defense
     int range = rand() % 20 + 10; // 10 to 30 range
     int shot = rand() % 1; // 0 to 1 shot speed
     int vit = rand() % 8; // 0 to 8 vitality
@@ -182,7 +189,7 @@ void LevelGenerator::GenerateItems(Level* level) const {
     //Generate a random location within the current room
     int row = rand() % current_room_height;
     int col = rand() % current_room_width;
-    Item* item = new Item("item", health, attack, defense, range, shot, vit);
+    Item* item = new Item("item", health, attack, range, shot, vit);
     current_room->AddItem(item, row, col);
   }
 }

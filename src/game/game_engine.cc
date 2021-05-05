@@ -26,6 +26,8 @@ void GameEngine::draw() {
   //Displays loss if the player has no hp, otherwise either displays inventory or game
   if (player_->GetCurrHp() <= 0) {
     DisplayLoss();
+  } else if (level_num_ > levels_to_win) {
+    DisplayWin();
   } else {
     if (!inventory_mode_) {
       current_level_->Display(current_room_->GetOrder());
@@ -127,15 +129,11 @@ void GameEngine::keyDown(ci::app::KeyEvent event) {
 void GameEngine::InteractGate() {
   //Updates the level number
   level_num_++;
-  if (level_num_ > levels_to_win) {
-    DisplayWin();
-  } else {
-    //Deletes the current level, generating a new one and updating the player's room
-    delete current_level_;
-    current_level_ = level_gen_.GenerateLevel();
-    current_room_ = current_level_->GetRooms().at(0);
-    player_->UpdateRoom(current_room_);
-  }
+  //Deletes the current level, generating a new one and updating the player's room
+  delete current_level_;
+  current_level_ = level_gen_.GenerateLevel();
+  current_room_ = current_level_->GetRooms().at(0);
+  player_->UpdateRoom(current_room_);
 }
 
 void GameEngine::OpenInventory() {
