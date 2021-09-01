@@ -3,7 +3,7 @@
 ---
 
 #### What is this Project?
-![game](/readme_images/game.png)
+![game](/readme_images/game_demo.gif)
 
 This project is a basic 2D grid based game where a player adventures between levels.
 Using the Cinder framework, this project randomly generates rooms that players must traverse through. 
